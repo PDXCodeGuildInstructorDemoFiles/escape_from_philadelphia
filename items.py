@@ -8,18 +8,18 @@ class Items:
         self.effect = effect
         self.weight = weight
 
+    def __str__(self):
+        return 'Name: {} Type: {} Effect: {} Weight: {}'.format(self.name.title(), self.type.capitalize(), self.effect, self.weight)
+
 
 def weapon(effect):
-    names = ['sword of might', 'wooden sword']
-    return Items(random.choice(names), 'weapon', effect, random.randrange(5, 10))
+    w_names = ['sword of might', 'wooden sword', 'big axe', 'dagger']
+    return Items(random.choice(w_names), 'weapon', effect, random.randrange(5, 10))
 
 
-def armor(self, name, type, effect, weight):
-    self.name = name
-    self.type = type
-    self.effect = effect
-    self.weight = weight
-
+def armor():
+    a_names = ('steel chest plate', 'iron helmet', 'leather gloves', 'spiked helm')
+    return Items(random.choice(a_names), 'armor', random.randrange(1, 50), random.randrange(5, 20))
 
 def first_aid(self, name, type, effect, weight):
     self.name = name
@@ -27,9 +27,9 @@ def first_aid(self, name, type, effect, weight):
     self.effect = effect
     self.weight = weight
 
-
+helmet = armor()
 sword = weapon(-20)
 
-print(sword.name)
-print(sword.weight)
+print(sword)
+print(helmet)
 
