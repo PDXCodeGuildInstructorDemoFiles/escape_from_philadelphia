@@ -1,7 +1,12 @@
 from random import randrange
 #
 class Monster:
-    def __init__(self, hp, strength, armor, magic): # be sure to add weapons back into the function down the road
+    '''this is intended as a base attribute list for our monsters'''
+    def __init__(self, hp, strength, armor, magic): '''be sure to add weapons back into the function down the road.  
+    add attribute position which will be a list where 0 = y & 1 = x.  this will be come clear later.'''
+        self.mode = 'ROAM' # also includes FIGHT when one must fight
+        self.avatar =
+        self.biom =
         self.hp = hp
         self.strength = strength
         self.armor = armor
@@ -14,6 +19,7 @@ class Monster:
 
 
 def generate_monster(level):
+    '''generates a monster based on certain ranges corresponding to a level as determined at some later time'''
     hp = randrange(40,100) * level
     strength = randrange(60,100)
     armor = int(round((hp * strength) / 200, 0))
@@ -22,7 +28,8 @@ def generate_monster(level):
     new_monster = Monster(hp, strength, armor, magic)
     print(new_monster)
 
-generate_monster(2)
+generate_monster(1)
+
 
 
 
