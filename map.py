@@ -416,6 +416,9 @@ class Map:
             player.current_position[0] = player.current_position[0]
             # move(6)
 
+##############################################################################
+
+
         elif arg == 4:  # 'w' | '4' :
             player.current_position[0] = player.current_position[0]
             if player.current_position[1] < 1 << 23:
