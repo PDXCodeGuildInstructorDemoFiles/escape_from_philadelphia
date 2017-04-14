@@ -30,7 +30,7 @@ class Map:
         return maprws
 
     # ENGINE
-    def reincarnate():
+    def reincarnate(self):
         """FOR WHEN PLAYER DIES BUT HAS MORE LIVES"""
 
         print("Killed by level {} {}.    Don't forget to heal!".format(level[0], monsters[self.this_monster[0]].type))
@@ -70,7 +70,7 @@ class Map:
         self.mapit()
         #
 
-    def monster_go():
+    def monster_go(self, monsters):
         '''MONSTERS TURN DETERMINATION'''
         for m in range(2):
             arg = 2
@@ -95,7 +95,7 @@ class Map:
                 self.this_monster[0] = m
                 monster_attack(m)
 
-    def monster_move(mm=0):
+    def monster_move(self, mm=0):
         '''maps the monster to a new position on map'''
 
         m = mm
@@ -127,7 +127,7 @@ class Map:
         self.map_rows[mon_row] = newrow
         ##############################################
 
-    def check_proximity(arg=2):
+    def check_proximity(self, arg=2):
         '''returns True if target is within proximity of arg. 
         2 == adjacent square; 
         3 == 2 spaces away
