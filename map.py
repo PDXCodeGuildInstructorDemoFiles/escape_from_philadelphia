@@ -11,7 +11,7 @@ class Map:
         789
     '''
 
-    def __init__(self):
+    def __init__(self, monsters):
         '''INITIALIZE VARIALBES'''
         self.MAP_SIZE = 24
         self.map_row = " . . . . . . . . . . . . . . . . . . . . . . . ."
@@ -19,7 +19,8 @@ class Map:
         self.frame_i = [0]
         self.head = [0]
         self.message_key = ['', '', '']
-        self.this_monster[0]
+        self.this_monster = [0]
+        self.monsters = monsters
 
 
     def initialize_map(self):
@@ -70,7 +71,7 @@ class Map:
         self.mapit()
         #
 
-    def monster_go(self, monsters):
+    def monster_go(self, player, monsters):
         '''MONSTERS TURN DETERMINATION'''
         for m in range(2):
             arg = 2
@@ -95,7 +96,7 @@ class Map:
                 self.this_monster[0] = m
                 monster_attack(m)
 
-    def monster_move(self, mm=0):
+    def monster_move(self, mm=0, monsters):
         '''maps the monster to a new position on map'''
 
         m = mm
