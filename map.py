@@ -29,8 +29,10 @@ class Map:
         self.head = [0]
         self.message_key = ['', '', '']
         self.this_monster = [0]
+
         self.monsters = monsters
         self.player = player
+        self.monster_modes = ['ROAM', 'FIGHT']
 
 
     def initialize_map(self):
@@ -87,9 +89,10 @@ class Map:
             arg = 2
             if abs(monsters[m].position[0] - player.current_position[0]) < arg and arg > abs(
                             monsters[m].position[1] - self.get_index_from_bit(player.current_position[1])):
-                monsters[m].mode = monster_modes[1]
+                monsters[m].mode = self.monster_modes[1]
             else:
-                monsters[m].mode = monster_modes[0]
+                monsters[m].mode = self.monster_modes[0]
+
 
             if monsters[m].mode == 'ROAM':
                 self.head[0] = 0
@@ -128,17 +131,20 @@ class Map:
         else:
             monsters[m].position[1] += choice([-1, 0, 1])
         newrow = self.map_rows[mon_row][: (mon_colm - 1) * 2]
+
+        ##### THIS IS THE TEST: ######################
         terr = self.map_rows[mon_row][(monsters[m].position[1] - 1) * 2: ((monsters[m].position[1] - 1) * 2) + 2]
-        # terr_prog = ".,•º∞*"
         ##############################################
+
+        # terr_prog = ".,•º∞*"
         terr_prog = monsters[0].biom
-        print('terr : "{}" '.format(terr))
+        # print('terr : "{}" '.format(terr))
         newrow += " " + terr_prog[(terr_prog.find(terr[1]) + 1) % len(terr_prog)]
         newrow += self.map_rows[mon_row][(mon_colm) * 2:]
         self.map_rows[mon_row] = newrow
         ##############################################
 
-    def check_proximity(self, arg=2):
+    def check_proximity(self, arg=2, monsters):
         '''returns True if target is within proximity of arg. 
         2 == adjacent square; 
         3 == 2 spaces away
@@ -173,8 +179,10 @@ class Map:
 
                    '.': 'Nothing to say.',
                    '': '',
+
                    # THIS IS NOT WORKING:
                    'killedit': 'You have slain the monster!',
+
                    'looted': 'You have looted the corpse',
                    'dmg': '- DAMAGE = '
                }[x] + additional
@@ -350,10 +358,14 @@ class Map:
             print(self.map_rows[row + x], row + x)
         self.hud()
 
-
+    def unobstructed(self, arg):
+        if arg == " #" or " ," == arg:
+            return False
+        else:
+            return True
 
         # CALCULATE TRANSLATION OF current_position
-    def move(arg):
+    def move(self, arg):
         ''' RECEIVE INPUT : CALLED EXTERNALLY
         map.move(number)
         123
@@ -363,29 +375,53 @@ class Map:
         SUCCESS, FAIL=HIT WALL
         '''
         # INSERT CONDITIONALS FOR WALL ENCOUNTERS
-        # print("move arg: ", arg)
+        print("move arg: ", arg)
+
+
+        temp_y0 = player.current_position[0]
+        temp_x1 = self.get_index_from_bit( player.current_position[1])
+
+
         if arg == 2:  # 'n'
             if player.current_position[0] > 0:
-                player.current_position[0] = player.current_position[0] - 1
-            player.current_position[1] = player.current_position[1]
-        elif arg == 0:  # 's' | '8' :
+                temp_y0 += -1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+
+                if self.unobstructed( terr ):
+                    player.current_position[0] = player.current_position[0] - 1
+                    player.current_position[1] = player.current_position[1]
+
+        elif arg == 0:  # '0' :
             player.current_position[0] = player.current_position[0]
             player.current_position[1] = player.current_position[1]
+
         elif arg == 8:  # 's' | '8' :
             if player.current_position[0] < 23:
-                player.current_position[0] = player.current_position[0] + 1
-            player.current_position[1] = player.current_position[1]
+                temp_y0 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.current_position[0] = player.current_position[0] + 1
+                    player.current_position[1] = player.current_position[1]
         # move(8)
+
         elif arg == 6:  # 'e' | '6' :
-            player.current_position[0] = player.current_position[0]
             if player.current_position[1] > 1:
-                player.current_position[1] = player.current_position[1] >> 1
+                temp_x1 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.current_position[1] = player.current_position[1] >> 1
+            player.current_position[0] = player.current_position[0]
             # move(6)
+
         elif arg == 4:  # 'w' | '4' :
             player.current_position[0] = player.current_position[0]
             if player.current_position[1] < 1 << 23:
                 player.current_position[1] = player.current_position[1] << 1
             # move(4)
+
         elif arg == 1:  # 'nw' | '1' :
             if player.current_position[0] > 0:
                 player.current_position[0] = player.current_position[0] - 1
