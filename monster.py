@@ -11,11 +11,33 @@ class Monster:
         self.strength = strength
         self.armor = armor
         self.magic = magic
-        # self.weapons = weapons
-        # self.level = level
+        self.m_typ = self.m_type()
+        self.biom = self.m_typ
+
+
 
     def __str__(self):
         return 'hp: {}, strength: {}, armor: {}, magic: {}'.format(self.hp, self.strength, self.armor, self.magic)
+
+
+    def m_type(self):
+        return [
+            (" §", ".,• º∞* xXX"),
+            (" £", ".,•º ∞* xXX"),
+            (" §", ".,•º ∞*:"),
+            (" π", " ,º ∞* .;"),
+            (" £", " .,*;"),
+            (" ¥", ". •* xXX"),
+            (" π", " .,•º∞*;"),
+            (" ∫", ".,• º∞*;"),
+            (" £", ".,•º∞*:"),
+            (" ƒ", " .,•º∞*:"),
+            (" §", ".,•º∞*: .")
+        ][randrange(25)  % 10]
+
+
+
+
 
 
 def generate_monster(level):
