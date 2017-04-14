@@ -1,5 +1,14 @@
 
 
+
+#######################################################
+# WORKING ON WALLS -JH
+
+# RECEIVE DIRECTIVES FOR MOVEMENT
+# GENERATE MAP
+# INHIBIT UNLAWFUL MOVES
+# GENERATE WALLS
+
 class Map:
     '''
     Maps the game y'all
@@ -11,7 +20,7 @@ class Map:
         789
     '''
 
-    def __init__(self, monsters):
+    def __init__(self, monsters, player):
         '''INITIALIZE VARIALBES'''
         self.MAP_SIZE = 24
         self.map_row = " . . . . . . . . . . . . . . . . . . . . . . . ."
@@ -21,6 +30,7 @@ class Map:
         self.message_key = ['', '', '']
         self.this_monster = [0]
         self.monsters = monsters
+        self.player = player
 
 
     def initialize_map(self):
@@ -408,12 +418,3 @@ class Map:
 
 
 
-
-
-#######################################################
-# WORKING ON WALLS -JH
-
-# RECEIVE DIRECTIVES FOR MOVEMENT
-# GENERATE MAP
-# INHIBIT UNLAWFUL MOVES
-# GENERATE WALLS
