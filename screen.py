@@ -1,6 +1,6 @@
 # WORKING ON WALLS -JH
 
-class screen:
+class Map:
 
     # RECEIVE DIRECTIVES FOR MOVEMENT
     # GENERATE MAP
