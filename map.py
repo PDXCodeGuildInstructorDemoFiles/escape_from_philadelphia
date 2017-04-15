@@ -358,7 +358,9 @@ class Map:
             print(self.map_rows[row + x], row + x)
         self.hud()
 
+
     def unobstructed(self, arg):
+        print(arg)
         if arg == " #" or " ," == arg:
             return False
         else:
@@ -376,25 +378,20 @@ class Map:
         '''
         # INSERT CONDITIONALS FOR WALL ENCOUNTERS
         print("move arg: ", arg)
-
-
         temp_y0 = player.current_position[0]
         temp_x1 = self.get_index_from_bit( player.current_position[1])
-
-
         if arg == 2:  # 'n'
             if player.current_position[0] > 0:
                 temp_y0 += -1
-                terr = self.map_rows[temp_y0][
-                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                terr = self.map_rows[temp_y0][ (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
 
                 if self.unobstructed( terr ):
                     player.current_position[0] = player.current_position[0] - 1
-                    player.current_position[1] = player.current_position[1]
+                    # player.current_position[1] = player.current_position[1]
 
         elif arg == 0:  # '0' :
-            player.current_position[0] = player.current_position[0]
-            player.current_position[1] = player.current_position[1]
+            # player.current_position[0] = player.current_position[0]
+            # player.current_position[1] = player.current_position[1]
 
         elif arg == 8:  # 's' | '8' :
             if player.current_position[0] < 23:
@@ -403,7 +400,7 @@ class Map:
                        (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
                 if self.unobstructed( terr ):
                     player.current_position[0] = player.current_position[0] + 1
-                    player.current_position[1] = player.current_position[1]
+                    # player.current_position[1] = player.current_position[1]
         # move(8)
 
         elif arg == 6:  # 'e' | '6' :
@@ -413,41 +410,77 @@ class Map:
                        (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
                 if self.unobstructed( terr ):
                     player.current_position[1] = player.current_position[1] >> 1
-            player.current_position[0] = player.current_position[0]
+            # player.current_position[0] = player.current_position[0]
             # move(6)
 
-##############################################################################
-
-
         elif arg == 4:  # 'w' | '4' :
-            player.current_position[0] = player.current_position[0]
             if player.current_position[1] < 1 << 23:
-                player.current_position[1] = player.current_position[1] << 1
+                temp_x1 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed(terr):
+                    player.current_position[1] = player.current_position[1] << 1
+                    # player.current_position[0] = player.current_position[0]
             # move(4)
+
 
         elif arg == 1:  # 'nw' | '1' :
             if player.current_position[0] > 0:
-                player.current_position[0] = player.current_position[0] - 1
+                temp_y0 += -1
+                terr = self.map_rows[temp_y0][ (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.current_position[0] = player.current_position[0] - 1
+
             if player.current_position[1] < 1 << 23:
-                player.current_position[1] = player.current_position[1] << 1
+                temp_x1 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed(terr):
+                    player.current_position[1] = player.current_position[1] << 1
             # move(1)
+
         elif arg == 3:  # 'ne' | '3' :
             if player.current_position[0] > 0:
-                player.current_position[0] = player.current_position[0] - 1
+                temp_y0 += -1
+                terr = self.map_rows[temp_y0][ (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.current_position[0] = player.current_position[0] - 1
             if player.current_position[1] > 1:
-                player.current_position[1] = player.current_position[1] >> 1
+                temp_x1 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.current_position[1] = player.current_position[1] >> 1
             # move(3)
+
         elif arg == 7:  # 'sw' | '7' :
             if player.current_position[0] < 23:
-                player.current_position[0] = player.current_position[0] + 1
+                temp_y0 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.current_position[0] = player.current_position[0] + 1
             if player.current_position[1] < 1 << 23:
-                player.current_position[1] = player.current_position[1] << 1
+                temp_x1 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed(terr):
+                    player.current_position[1] = player.current_position[1] << 1
             # move(7)
+
         elif arg == 9:  # 'se' | '9' :
             if player.current_position[0] < 23:
-                player.current_position[0] = player.current_position[0] + 1
+                temp_y0 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.current_position[0] = player.current_position[0] + 1
             if player.current_position[1] > 1:
-                player.current_position[1] = player.current_position[1] >> 1
+                temp_x1 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.current_position[1] = player.current_position[1] >> 1
             # move(9)
         self.monster_go()
         # header(0)
