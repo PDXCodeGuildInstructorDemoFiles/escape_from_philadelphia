@@ -262,7 +262,7 @@ class Map:
                                                     self.message(self.message_key[2][:3],
                                                                  self.message_key[2][self.message_key[2].find(' '):])))
         print("RIGHT: {}    GOLD  : {} ".format(player.inventory[1]['name'], player.gold))
-        print(":POTION ^(f)                  (r)^ STAFF:")
+        # print(":POTION ^(f)                  (r)^ STAFF:")
         print(self.message(self.message_key[1]), self.message(self.message_key[0]))
 
         # HELPER FUNCTION FOR mapit()
