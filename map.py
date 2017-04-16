@@ -20,8 +20,16 @@ class Map:
         789
     '''
 
-    def __init__(self, player, monsters=[]):
+    def __init__(self, player, monsters, ma_fn_ref, lvl_fn_ref, get_lives_fn, get_mon_fn):
         '''INITIALIZE VARIALBES'''
+        self.player = player
+        self.monsters = monsters
+
+        self.monster_attack = ma_fn_ref
+        self.level_fn = lvl_fn_ref
+        self.get_lives = get_lives_fn
+        self.get_monsters = get_mon_fn
+
         self.MAP_SIZE = 24
         self.map_row = " . . . . . . . . . . . . . . . . . . . . . . . ."
         self.map_rows = self.initialize_map()  # []
@@ -29,9 +37,6 @@ class Map:
         self.head = [0]
         self.message_key = ['', '', '']
         self.this_monster = [0]
-
-        self.monsters = monsters
-        self.player = player
         self.monster_modes = ['ROAM', 'FIGHT']
 
 
@@ -65,6 +70,8 @@ class Map:
         mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
         mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
 
+        return mp
+
 
 
 
@@ -76,10 +83,10 @@ class Map:
         # return maprws
 
     # ENGINE
-    def reincarnate(self):
+    def reincarnate(self, player, monsters):
         """FOR WHEN PLAYER DIES BUT HAS MORE LIVES"""
 
-        print("Killed by level {} {}.    Don't forget to heal!".format(level[0], monsters[self.this_monster[0]].type))
+        print("Killed by level {} {}.    Don't forget to heal!".format(self.level_fn(), monsters[self.this_monster[0]].type))
         print("################################################## ")
         print("################################################## ")
         print("################################################## ")
@@ -105,7 +112,7 @@ class Map:
         print("################################################## ")
         print("################################################## ")
         print("################################################## ")
-        self.hud()
+        self.hud(player)
         verdict = input('Reincarnate? ( any key or (n)o ) : ')
         if verdict.lower() == 'n':
             quit()
@@ -113,7 +120,7 @@ class Map:
         player.position[0] = 10
         player.position[1] = 1024
         self.head[0] = 5
-        self.mapit()
+        self.mapit(player, monsters)
         #
 
     def monster_go(self, player, monsters):
@@ -130,7 +137,7 @@ class Map:
             if monsters[m].mode == 'ROAM':
                 self.head[0] = 0
 
-                monster_move(m)
+                self.monster_move(monsters, m)
                 # if self.message_key[1] != 'm1':
                 self.message_key[1] = ''
                 self.message_key[2] = ''
@@ -140,7 +147,7 @@ class Map:
                 self.head[0] = 2
 
                 self.this_monster[0] = m
-                monster_attack(m)
+                self.monster_attack(m)
 
     def monster_move(self, monsters, mm=0):
         '''maps the monster to a new position on map'''
@@ -190,7 +197,7 @@ class Map:
                 return True
         return False
 
-    def message(self, x, additional=''):
+    def message(self, x, additional='', monsters=[]):
         '''MESSAGE SYSTEM : TO BE REVAMPED FOR NEW GAME'''
         return {
                    'cast': 'Magic spell cast, doing some damage.',
@@ -206,8 +213,8 @@ class Map:
                    'g1': 'Gained 1 Gold.',
 
                    'm1': 'Fight monster: {} with {}({}) HP:{} '
-                       .format(monsters[self.this_monster[0]].type, monsters[self.this_monster[0]].inventory[0]['name'],
-                               monsters[self.this_monster[0]].inventory[0]['damage'], monsters[self.this_monster[0]].health),
+                       .format(self.get_monsters()[self.this_monster[0]].type, self.get_monsters()[self.this_monster[0]].inventory[0]['name'],
+                               self.get_monsters()[self.this_monster[0]].inventory[0]['damage'], self.get_monsters()[self.this_monster[0]].health),
 
                    '.': 'Nothing to say.',
                    '': '',
@@ -221,7 +228,7 @@ class Map:
 
         # MESSAGING
         # STATS
-    def hud(self):
+    def hud(self, player):
         '''HEADS UP DISPLAY : TEN LINES X48 CHARACTERS
         
         '''
@@ -255,7 +262,7 @@ class Map:
                                                     self.message(self.message_key[2][:3],
                                                                  self.message_key[2][self.message_key[2].find(' '):])))
         print("RIGHT: {}    GOLD  : {} ".format(player.inventory[1]['name'], player.gold))
-        # print(":POTION ^(f)                  (r)^ STAFF:")
+        print(":POTION ^(f)                  (r)^ STAFF:")
         print(self.message(self.message_key[1]), self.message(self.message_key[0]))
 
         # HELPER FUNCTION FOR mapit()
@@ -270,7 +277,7 @@ class Map:
         '''PRINTS HEADER'''
         # print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
         self.frame_i[0] += 1
-        print('Frame # {}  Level # {}   Lives : {}'.format(self.frame_i[0], level[0], LIVES[0]))
+        print('Frame # {}  Level # {}   Lives : {} '.format(self.frame_i[0], self.level_fn() , self.get_lives() ))
 
         if self.head[0] == 0:
             print("######################################## Move Key: 123 | 123")
@@ -286,7 +293,7 @@ class Map:
             print("################################################## ")
         elif self.head[0] == 3:
 
-            print("Killed by level {} {}.    Don't forget to heal!".format(level[0], monsters[0].type))
+            print("Killed by level {} {}.    Don't forget to heal!".format(self.level_fn(), monsters[0].type))
             print("################################################## ")
             print("################################################## ")
             print("################################################## ")
@@ -314,7 +321,7 @@ class Map:
             print("################################################## ")
             print("################################################## ")
             print("################################################## ")
-            self.hud()
+            self.hud(player)
 
         elif self.head[0] == 4:
             print("################################################## ")
@@ -374,7 +381,7 @@ class Map:
             self.message_key[0] = 'g5'
         elif thisrow == ' x':
             player.re_equip()
-            # player.inventory[0] = new_weapon(level[0])
+            # player.inventory[0] = self.new_weapon_fn_ref(self.level_fn())
             self.message_key[0] = 'looted'
         else:
             self.message_key[0] = ''
@@ -388,12 +395,12 @@ class Map:
         print(p, row)
         for x in range(1, ind):
             print(self.map_rows[row + x], row + x)
-        self.hud()
+        self.hud(player)
 
 
     def unobstructed(self, arg):
         print(arg)
-        if arg == " #" or " ," == arg:
+        if arg == " #":
             return False
         else:
             return True
@@ -515,10 +522,10 @@ class Map:
                 if self.unobstructed( terr ):
                     player.position[1] = player.position[1] >> 1
             # move(9)
-        self.monster_go(monsters)
+        self.monster_go(player, monsters)
         # header(0)
         # self.mapit(player.position[0], player.position[1])
-        self.mapit()
+        self.mapit(player, monsters)
 
 
 

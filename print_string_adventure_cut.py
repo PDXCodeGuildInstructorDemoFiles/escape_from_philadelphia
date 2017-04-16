@@ -32,6 +32,14 @@ this_monster = [0]
 level = [1]
 
 # initialize
+
+def get_level():
+    return level[0]
+
+def get_lives_func():
+    return LIVES[0]
+
+
 def generate_monster():
     player.level += 1
     level[0] += 1
@@ -484,7 +492,7 @@ def game_over(win):
     else:
         LIVES[0] -= 1
         if LIVES[0] > 0:
-            reincarnate()
+            map.reincarnate(player, monsters)
         else:
             map.head[0] = 3
             map.header()
@@ -519,8 +527,8 @@ def player_attack(arg):
                                                 (player.gold * .01))  - monsters[this_monster[0]].inventory[1]['block']
     if check_death(monsters[this_monster[0]].health):
         game_over(True)
-    monster_go()
-    map.mapit()
+    map.monster_go(player, monsters)
+    map.mapit(player, monsters)
 
 
 
@@ -627,7 +635,8 @@ def heal_self(arg='9'):
     print(arg)
     player.gold = player.gold - int(arg)
     player.health = player.health + int(arg)
-    monster_go()
+    #self.monster_go()
+    map.monster_go(player, monsters)
 
 def cast_spell(spell=''):
     if spell[:5] == 'black' and player.gold > 60:
@@ -676,8 +685,12 @@ def cast_spell(spell=''):
 
 monsters = [Monster(1), Monster(1)]
 player = Player()
-# map = Map()
-map = Map(player, monsters)
+
+
+def get_monsters_fn():
+    return monsters
+
+map = Map(player, monsters, monster_attack, get_level,  get_lives_func, get_monsters_fn)
 map.mapit(player, monsters)
 
 
@@ -694,12 +707,12 @@ while True:
         if check_proximity():
             player_attack(command[command.find(" ") + 1:])
         else:
-            map.move(0)
+            map.move(0, player, monsters)
 
     elif command[:4] == 'cast' or 'c' == command[:1]:
         cast_spell(command[command.find(' ')+1:])
         map.head[0] = 1
-        map.mapit()
+        map.mapit( player, monsters)
 
     elif command[:4] == 'heal' or 'h' == command[:1]:
 
@@ -709,7 +722,7 @@ while True:
         else:
             heal_self()
         map.head[0] = 0
-        map.mapit()
+        map.mapit( player, monsters)
 
     else:
         for i in range(len(command)):
@@ -717,19 +730,19 @@ while True:
                 if input('      Are you sure you want to quit? (c) ') == 'c':
                     quit()
             elif command[i] == 'n' or '2' == command[i] or 'A' == command[i]:
-                map.move(2)
+                map.move(2, player, monsters)
             elif command[i] == 's' or '8' == command[i] or 'B' == command[i]:
-                map.move(8)
+                map.move(8, player, monsters)
             elif command[i] == 'e' or '6' == command[i] or 'C' == command[i]:
-                map.move(6)
+                map.move(6, player, monsters)
             elif command[i] == 'q' or '4' == command[i] or 'D' == command[i]:
-                map.move(4)
+                map.move(4, player, monsters)
             elif command[i] == '1':
-                map.move(1)
+                map.move(1, player, monsters)
             elif command[i] == '3':
-                map.move(3)
+                map.move(3, player, monsters)
             elif command[i] == '7' or 'a' == command[i]:
-                map.move(7)
+                map.move(7, player, monsters)
             elif command[i] == '9' or 'd' == command[i]:
-                map.move(9)
+                map.move(9, player, monsters)
 
