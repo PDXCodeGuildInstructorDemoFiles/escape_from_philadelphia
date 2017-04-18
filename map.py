@@ -36,6 +36,8 @@ class Map:
         self.this_monster = [0]
         self.monster_modes = ['ROAM', 'FIGHT']
 
+    def test(self):
+        pass
 
     def initialize_map(self):
         '''INITIALIZE MAP'''
