@@ -11,8 +11,6 @@ from random import choice
 
 class Map:
     '''
-    Maps the game y'all
-    
     METHODS:
         move(num)
         123
@@ -72,17 +70,13 @@ class Map:
 
         return mp
 
-
-
-
-
-
         # maprws = []
         # for r in range(self.MAP_SIZE):
         #     maprws.append(self.map_row)
         # return maprws
 
-    # ENGINE
+
+
     def reincarnate(self, player, monsters):
         """FOR WHEN PLAYER DIES BUT HAS MORE LIVES"""
 
@@ -143,7 +137,6 @@ class Map:
             if monsters[m].mode == 'ROAM':
                 self.head[0] = 0
                 self.monster_move(monsters, m)
-                # if self.message_key[1] != 'm1':
             elif monsters[m].mode == 'FIGHT':
                 self.message_key[1] = 'm1'
                 self.head[0] = 2
@@ -295,7 +288,7 @@ class Map:
             print("################################################## ")
         elif self.head[0] == 3:
 
-            print("Killed by level {} {}.    Don't forget to heal!".format(self.level_fn(), monsters[0].type))
+            print("Killed by level {} {}.  Don't forget to heal!".format(self.level_fn(), monsters[0].type))
             print("################################################## ")
             print("################################################## ")
             print("################################################## ")
