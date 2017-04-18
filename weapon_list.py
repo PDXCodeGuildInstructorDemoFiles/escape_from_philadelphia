@@ -6,11 +6,11 @@ and weapons. Will try to make a master dictionary which will allow us to have a 
 import math
 import random
 
-basic_armor = ['Construction Chaps', 'Motorcycle Helmet', 'Leather Gloves', 'Welding Helmet']
+basic_armor = ['Construction Chaps', 'Motorcycle Helmet', 'Leather Gloves', 'Welding Helmet', 'Wooden Shield', 'Hiking Boots']
 
-common_armor = ['Kevlar Vest', 'Iron Chest Plate', 'Steel Toe Boots']
+common_armor = ['Kevlar Vest', 'Iron Chest Plate', 'Steel Toe Boots', 'Radiation Suit']
 
-rare_armor = ['Bullet Proof Suit', 'Viking Helmet', 'Steel Chest Plate']
+rare_armor = ['Bullet Proof Suit', 'Viking Helmet', 'Steel Chest Plate', 'Riot Helmet']
 
 epic_armor = ['Titanium Cuffs', 'Mech Body Armor']
 
@@ -150,27 +150,27 @@ print(aid3)
 print(aid4)
 print(aid5)
 
-# weapon1 = create_weapon()
-# weapon2 = create_weapon()
-# weapon3 = create_weapon()
-# weapon4 = create_weapon()
-# weapon5 = create_weapon()
-# weapon6 = create_weapon()
-# weapon7 = create_weapon()
-# weapon8 = create_weapon()
-# weapon9 = create_weapon()
-# weapon10 = create_weapon()
-#
-# print(weapon1)
-# print(weapon2)
-# print(weapon3)
-# print(weapon4)
-# print(weapon5)
-# print(weapon6)
-# print(weapon7)
-# print(weapon8)
-# print(weapon9)
-# print(weapon10)
+weapon1 = create_weapon()
+weapon2 = create_weapon()
+weapon3 = create_weapon()
+weapon4 = create_weapon()
+weapon5 = create_weapon()
+weapon6 = create_weapon()
+weapon7 = create_weapon()
+weapon8 = create_weapon()
+weapon9 = create_weapon()
+weapon10 = create_weapon()
+
+print(weapon1)
+print(weapon2)
+print(weapon3)
+print(weapon4)
+print(weapon5)
+print(weapon6)
+print(weapon7)
+print(weapon8)
+print(weapon9)
+print(weapon10)
 #
 # armor1 = create_armor()
 # armor2 = create_armor()
