@@ -39,6 +39,9 @@ class Inventory:                                                                
               elif bag_weight < 100:
                   print("Bag will be too heavy! Can't add this!")
               else:
+                  player_inv.append()
+                  print('{} has been added to your bag!')
+
                   #add-to-inventory function here
 
 
