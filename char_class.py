@@ -35,6 +35,7 @@ class CharacterAttributes:
         # so they get hit a lot
 
     def human(self):
+        self.name = 'Who-Man'
         self.hp = randrange(3, 15)
         self.exp = randrange(1, 15)
         self.stamina = randrange(3, 7)
