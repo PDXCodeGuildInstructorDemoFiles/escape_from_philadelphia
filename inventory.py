@@ -13,7 +13,7 @@ class Inventory:
     # def __repr__(self):
     #     return str(char_inv)
 
-    def use_item(self):
+    # def use_item(self):
 
 
 
