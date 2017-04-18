@@ -1,4 +1,3 @@
-
 from random import choice
 
 #######################################################
@@ -519,7 +518,6 @@ class Map:
             # move(9)
         self.monster_go(player, monsters)
         # header(0)
-        # self.mapit(player.position[0], player.position[1])
         self.mapit(player, monsters)
 
 
