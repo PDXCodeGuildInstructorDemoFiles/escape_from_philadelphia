@@ -2,8 +2,11 @@ from random import randrange, choice
 #
 class Monster:
     '''this is intended as a base attribute list for our monsters'''
-    def __init__(self, hp, strength, armor, magic): '''be sure to add weapons back into the function down the road.  
-    add attribute position which will be a list where 0 = y & 1 = x.  this will be come clear later.'''
+    def __init__(self, hp, strength, armor, magic):
+        """be sure to add weapons back into the function down the road.  
+        add attribute position which will be a list where 0 = y & 1 = x.  
+        this will be come clear later."""
+
         self.mode = None #'ROAM' also includes 'FIGHT' when one must fight - function to follow?
         self.avatar = None
         self.hp = hp
@@ -12,7 +15,6 @@ class Monster:
         self.magic = magic
         # self.m_typ = self.m_type() #touch base with Joe re: this and the succeeding attribute
         # self.biom = self.m_typ
-
 
     def __str__(self):
         return 'hp: {}, strength: {}, armor: {}, magic: {}'.format(self.hp, self.strength, self.armor, self.magic)
@@ -82,7 +84,7 @@ class Monster:
 
 class Character:
     '''a basic outline for character attributes'''
-    def __init__(self, boots, gloves, pants, chest_plate, name, ability)
+    def __init__(self, boots, gloves, pants, chest_plate, name, ability):
         self.boots = None
         self.gloves = None
         self.pants = None
