@@ -1,5 +1,4 @@
-
-
+from random import choice
 
 #######################################################
 # WORKING ON WALLS -JH
@@ -11,8 +10,6 @@
 
 class Map:
     '''
-    Maps the game y'all
-    
     METHODS:
         move(num)
         123
@@ -20,8 +17,16 @@ class Map:
         789
     '''
 
-    def __init__(self, monsters, player):
+    def __init__(self, player, monsters, ma_fn_ref, lvl_fn_ref, get_lives_fn, get_mon_fn):
         '''INITIALIZE VARIALBES'''
+        self.player = player
+        self.monsters = monsters
+
+        self.monster_attack = ma_fn_ref
+        self.level_fn = lvl_fn_ref
+        self.get_lives = get_lives_fn
+        self.get_monsters = get_mon_fn
+
         self.MAP_SIZE = 24
         self.map_row = " . . . . . . . . . . . . . . . . . . . . . . . ."
         self.map_rows = self.initialize_map()  # []
@@ -29,22 +34,52 @@ class Map:
         self.head = [0]
         self.message_key = ['', '', '']
         self.this_monster = [0]
-        self.monsters = monsters
-        self.player = player
+        self.monster_modes = ['ROAM', 'FIGHT']
 
 
     def initialize_map(self):
         '''INITIALIZE MAP'''
-        maprws = []
-        for r in range(self.MAP_SIZE):
-            maprws.append(self.map_row)
-        return maprws
 
-    # ENGINE
-    def reincarnate(self):
+        mp = []
+        mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
+        mp.append(" . . . . . . . . . . . . . # . . . # . . . . . .")
+        mp.append(" . . . . . . . . . . . . . # . . . # . . . . . .")
+        mp.append(" . . . . . . . . . . . . . # . . . # . . . . . .")
+        mp.append(" . . . . . . . . . . . . . # # # # # . . . . . .")
+        mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
+        mp.append(" . . . . . . . # # # # # . # # # # # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . . . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # # # # # # # # # # # . . . . . .")
+        mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
+        mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
+        mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
+        mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
+
+        return mp
+
+        # maprws = []
+        # for r in range(self.MAP_SIZE):
+        #     maprws.append(self.map_row)
+        # return maprws
+
+
+
+    def reincarnate(self, player, monsters):
         """FOR WHEN PLAYER DIES BUT HAS MORE LIVES"""
 
-        print("Killed by level {} {}.    Don't forget to heal!".format(level[0], monsters[self.this_monster[0]].type))
+        print("Killed by level {} {}.    Don't forget to heal!".format(self.level_fn(), monsters[self.this_monster[0]].type))
         print("################################################## ")
         print("################################################## ")
         print("################################################## ")
@@ -70,43 +105,46 @@ class Map:
         print("################################################## ")
         print("################################################## ")
         print("################################################## ")
-        self.hud()
+        self.hud(player)
         verdict = input('Reincarnate? ( any key or (n)o ) : ')
         if verdict.lower() == 'n':
             quit()
         player.health = 100
-        player.current_position[0] = 10
-        player.current_position[1] = 1024
+        player.position[0] = 10
+        player.position[1] = 1024
         self.head[0] = 5
-        self.mapit()
+        self.mapit(player, monsters)
         #
+
+
 
     def monster_go(self, player, monsters):
         '''MONSTERS TURN DETERMINATION'''
+
+        # fizz = lambda v: v
+
+        self.message_key[1] = ''
+        self.message_key[2] = ''
         for m in range(2):
             arg = 2
-            if abs(monsters[m].position[0] - player.current_position[0]) < arg and arg > abs(
-                            monsters[m].position[1] - self.get_index_from_bit(player.current_position[1])):
-                monsters[m].mode = monster_modes[1]
+            if abs(monsters[m].position[0] - player.position[0]) < arg and arg > abs(
+                            monsters[m].position[1] - self.get_index_from_bit(player.position[1])):
+                monsters[m].mode = self.monster_modes[1]
             else:
-                monsters[m].mode = monster_modes[0]
+                monsters[m].mode = self.monster_modes[0]
 
             if monsters[m].mode == 'ROAM':
                 self.head[0] = 0
-
-                monster_move(m)
-                # if self.message_key[1] != 'm1':
-                self.message_key[1] = ''
-                self.message_key[2] = ''
+                self.monster_move(monsters, m)
             elif monsters[m].mode == 'FIGHT':
-
                 self.message_key[1] = 'm1'
                 self.head[0] = 2
-
                 self.this_monster[0] = m
-                monster_attack(m)
+                self.monster_attack(m)
 
-    def monster_move(self, mm=0, monsters):
+
+
+    def monster_move(self, monsters, mm=0):
         '''maps the monster to a new position on map'''
 
         m = mm
@@ -128,17 +166,19 @@ class Map:
         else:
             monsters[m].position[1] += choice([-1, 0, 1])
         newrow = self.map_rows[mon_row][: (mon_colm - 1) * 2]
+
+        ##### THIS IS THE TEST: ######################
         terr = self.map_rows[mon_row][(monsters[m].position[1] - 1) * 2: ((monsters[m].position[1] - 1) * 2) + 2]
-        # terr_prog = ".,•º∞*"
         ##############################################
+
+        # terr_prog = ".,•º∞*"
         terr_prog = monsters[0].biom
-        print('terr : "{}" '.format(terr))
+        # print('terr : "{}" '.format(terr))
         newrow += " " + terr_prog[(terr_prog.find(terr[1]) + 1) % len(terr_prog)]
         newrow += self.map_rows[mon_row][(mon_colm) * 2:]
         self.map_rows[mon_row] = newrow
-        ##############################################
 
-    def check_proximity(self, arg=2):
+    def check_proximity(self, monsters, player, arg=2):
         '''returns True if target is within proximity of arg. 
         2 == adjacent square; 
         3 == 2 spaces away
@@ -146,13 +186,13 @@ class Map:
         '''
 
         for m in range(2):
-            if abs(monsters[m].position[0] - player.current_position[0]) < arg and arg > abs(
-                            monsters[m].position[1] - self.get_index_from_bit(player.current_position[1])):
-                this_monster[0] = m
+            if abs(monsters[m].position[0] - player.position[0]) < arg and arg > abs(
+                            monsters[m].position[1] - self.get_index_from_bit(player.position[1])):
+                self.this_monster[0] = m
                 return True
         return False
 
-    def message(self, x, additional=''):
+    def message(self, x, additional='', monsters=[]):
         '''MESSAGE SYSTEM : TO BE REVAMPED FOR NEW GAME'''
         return {
                    'cast': 'Magic spell cast, doing some damage.',
@@ -168,20 +208,21 @@ class Map:
                    'g1': 'Gained 1 Gold.',
 
                    'm1': 'Fight monster: {} with {}({}) HP:{} '
-                       .format(monsters[self.this_monster[0]].type, monsters[self.this_monster[0]].inventory[0]['name'],
-                               monsters[self.this_monster[0]].inventory[0]['damage'], monsters[self.this_monster[0]].health),
+                       .format(self.get_monsters()[self.this_monster[0]].type, self.get_monsters()[self.this_monster[0]].inventory[0]['name'],
+                               self.get_monsters()[self.this_monster[0]].inventory[0]['damage'], self.get_monsters()[self.this_monster[0]].health),
 
                    '.': 'Nothing to say.',
                    '': '',
+
                    # THIS IS NOT WORKING:
                    'killedit': 'You have slain the monster!',
+
                    'looted': 'You have looted the corpse',
                    'dmg': '- DAMAGE = '
                }[x] + additional
 
-        # MESSAGING
-        # STATS
-    def hud(self):
+
+    def hud(self, player):
         '''HEADS UP DISPLAY : TEN LINES X48 CHARACTERS
         
         '''
@@ -230,7 +271,7 @@ class Map:
         '''PRINTS HEADER'''
         # print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
         self.frame_i[0] += 1
-        print('Frame # {}  Level # {}   Lives : {}'.format(self.frame_i[0], level[0], LIVES[0]))
+        print('Frame # {}  Level # {}   Lives : {} '.format(self.frame_i[0], self.level_fn() , self.get_lives() ))
 
         if self.head[0] == 0:
             print("######################################## Move Key: 123 | 123")
@@ -246,7 +287,7 @@ class Map:
             print("################################################## ")
         elif self.head[0] == 3:
 
-            print("Killed by level {} {}.    Don't forget to heal!".format(level[0], monsters[0].type))
+            print("Killed by level {} {}.  Don't forget to heal!".format(self.level_fn(), self.get_monsters()[0].type))
             print("################################################## ")
             print("################################################## ")
             print("################################################## ")
@@ -274,7 +315,7 @@ class Map:
             print("################################################## ")
             print("################################################## ")
             print("################################################## ")
-            self.hud()
+            self.hud(player)
 
         elif self.head[0] == 4:
             print("################################################## ")
@@ -285,10 +326,10 @@ class Map:
             print("######## !! YOU HAVE BEEN REINCARNATED !! ######## ")
             print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ")
 
-    def mapit(self, a='', b=''):
+    def mapit(self, player, monsters, a='', b=''):
         '''PRINTS MAP : CALLED INTERNALLY'''
-        col = player.current_position[1]
-        row = player.current_position[0]
+        col = player.position[1]
+        row = player.position[0]
         self.header()
         ind = self.MAP_SIZE - row
 
@@ -334,7 +375,6 @@ class Map:
             self.message_key[0] = 'g5'
         elif thisrow == ' x':
             player.re_equip()
-            # player.inventory[0] = new_weapon(level[0])
             self.message_key[0] = 'looted'
         else:
             self.message_key[0] = ''
@@ -348,12 +388,19 @@ class Map:
         print(p, row)
         for x in range(1, ind):
             print(self.map_rows[row + x], row + x)
-        self.hud()
+        self.hud(player)
 
 
+    def unobstructed(self, arg):
+        '''CHECK FOR OBSTRUCTION TO MOVEMENT'''
+        print(arg)
+        if arg == " #":
+            return False
+        else:
+            return True
 
-        # CALCULATE TRANSLATION OF current_position
-    def move(arg):
+        # CALCULATE TRANSLATION OF position
+    def move(self, arg, player, monsters):
         ''' RECEIVE INPUT : CALLED EXTERNALLY
         map.move(number)
         123
@@ -363,57 +410,115 @@ class Map:
         SUCCESS, FAIL=HIT WALL
         '''
         # INSERT CONDITIONALS FOR WALL ENCOUNTERS
-        # print("move arg: ", arg)
+        print("move arg: ", arg)
+        temp_y0 = player.position[0]
+        temp_x1 = self.get_index_from_bit(player.position[1])
         if arg == 2:  # 'n'
-            if player.current_position[0] > 0:
-                player.current_position[0] = player.current_position[0] - 1
-            player.current_position[1] = player.current_position[1]
-        elif arg == 0:  # 's' | '8' :
-            player.current_position[0] = player.current_position[0]
-            player.current_position[1] = player.current_position[1]
-        elif arg == 8:  # 's' | '8' :
-            if player.current_position[0] < 23:
-                player.current_position[0] = player.current_position[0] + 1
-            player.current_position[1] = player.current_position[1]
+            if player.position[0] > 0:
+                temp_y0 += -1
+                terr = self.map_rows[temp_y0][ (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+
+                if self.unobstructed( terr ):
+                    player.position[0] = player.position[0] - 1
+                    # player.position[1] = player.position[1]
+
+        elif arg == 0:  # '0' :
+            pass
+            # player.position[0] = player.position[0]
+            # player.position[1] = player.position[1]
+
+        elif arg == 8:
+            # 's' | '8' :
+            if player.position[0] < 23:
+                temp_y0 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.position[0] = player.position[0] + 1
+                    # player.position[1] = player.position[1]
         # move(8)
+
         elif arg == 6:  # 'e' | '6' :
-            player.current_position[0] = player.current_position[0]
-            if player.current_position[1] > 1:
-                player.current_position[1] = player.current_position[1] >> 1
+            if player.position[1] > 1:
+                temp_x1 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.position[1] = player.position[1] >> 1
+            # player.position[0] = player.position[0]
             # move(6)
+
         elif arg == 4:  # 'w' | '4' :
-            player.current_position[0] = player.current_position[0]
-            if player.current_position[1] < 1 << 23:
-                player.current_position[1] = player.current_position[1] << 1
+            if player.position[1] < 1 << 23:
+                temp_x1 += -1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed(terr):
+                    player.position[1] = player.position[1] << 1
+                    # player.position[0] = player.position[0]
             # move(4)
+
         elif arg == 1:  # 'nw' | '1' :
-            if player.current_position[0] > 0:
-                player.current_position[0] = player.current_position[0] - 1
-            if player.current_position[1] < 1 << 23:
-                player.current_position[1] = player.current_position[1] << 1
+            if player.position[0] > 0:
+                temp_y0 += -1
+                terr = self.map_rows[temp_y0][ (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.position[0] = player.position[0] - 1
+
+            if player.position[1] < 1 << 23:
+                temp_x1 += -1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed(terr):
+                    player.position[1] = player.position[1] << 1
             # move(1)
+
         elif arg == 3:  # 'ne' | '3' :
-            if player.current_position[0] > 0:
-                player.current_position[0] = player.current_position[0] - 1
-            if player.current_position[1] > 1:
-                player.current_position[1] = player.current_position[1] >> 1
+            if player.position[0] > 0:
+                temp_y0 += -1
+                terr = self.map_rows[temp_y0][ (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.position[0] = player.position[0] - 1
+            if player.position[1] > 1:
+                temp_x1 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.position[1] = player.position[1] >> 1
             # move(3)
+
         elif arg == 7:  # 'sw' | '7' :
-            if player.current_position[0] < 23:
-                player.current_position[0] = player.current_position[0] + 1
-            if player.current_position[1] < 1 << 23:
-                player.current_position[1] = player.current_position[1] << 1
+            if player.position[0] < 23:
+                temp_y0 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.position[0] = player.position[0] + 1
+            if player.position[1] < 1 << 23:
+                temp_x1 += -1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed(terr):
+                    player.position[1] = player.position[1] << 1
             # move(7)
+
         elif arg == 9:  # 'se' | '9' :
-            if player.current_position[0] < 23:
-                player.current_position[0] = player.current_position[0] + 1
-            if player.current_position[1] > 1:
-                player.current_position[1] = player.current_position[1] >> 1
+            if player.position[0] < 23:
+                temp_y0 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.position[0] = player.position[0] + 1
+            if player.position[1] > 1:
+                temp_x1 += 1
+                terr = self.map_rows[temp_y0][
+                       (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
+                if self.unobstructed( terr ):
+                    player.position[1] = player.position[1] >> 1
             # move(9)
-        self.monster_go()
+        self.monster_go(player, monsters)
         # header(0)
-        # self.mapit(player.current_position[0], player.current_position[1])
-        self.mapit()
+        self.mapit(player, monsters)
 
 
 
