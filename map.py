@@ -45,26 +45,26 @@ class Map:
 
         mp = []
         mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
+        mp.append(" . . . . . . . . . . . . . # . . . # . . . . . .")
+        mp.append(" . . . . . . . . . . . . . # . . . # . . . . . .")
+        mp.append(" . . . . . . . . . . . . . # . . . # . . . . . .")
+        mp.append(" . . . . . . . . . . . . . # # # # # . . . . . .")
         mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . . . . . . . # . . . . . . . . . .")
-        mp.append(" . . . . . . . . . . . . . # # # . . . . . . . .")
-        mp.append(" . . . . . . . . . . . . . # . . . . . . . . . .")
-        mp.append(" . . . . . . . # # # # # . . . . . . . . . . . .")
-        mp.append(" . . . . . . . # . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . # . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . # . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . # . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . # . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . # . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . # . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . # . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . # . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . # . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . # . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . # . . . . . . . . . . . . . . . .")
-        mp.append(" . . . . . . . # # # # # # # # . . . . . . . . .")
+        mp.append(" . . . . . . . # # # # # . # # # # # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . . . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # . . . . . . . . . # . . . . . .")
+        mp.append(" . . . . . . . # # # # # # # # # # # . . . . . .")
         mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
         mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
         mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
@@ -123,8 +123,15 @@ class Map:
         self.mapit(player, monsters)
         #
 
+
+
     def monster_go(self, player, monsters):
         '''MONSTERS TURN DETERMINATION'''
+
+        # fizz = lambda v: v
+
+        self.message_key[1] = ''
+        self.message_key[2] = ''
         for m in range(2):
             arg = 2
             if abs(monsters[m].position[0] - player.position[0]) < arg and arg > abs(
@@ -133,21 +140,17 @@ class Map:
             else:
                 monsters[m].mode = self.monster_modes[0]
 
-
             if monsters[m].mode == 'ROAM':
                 self.head[0] = 0
-
                 self.monster_move(monsters, m)
                 # if self.message_key[1] != 'm1':
-                self.message_key[1] = ''
-                self.message_key[2] = ''
             elif monsters[m].mode == 'FIGHT':
-
                 self.message_key[1] = 'm1'
                 self.head[0] = 2
-
                 self.this_monster[0] = m
                 self.monster_attack(m)
+
+
 
     def monster_move(self, monsters, mm=0):
         '''maps the monster to a new position on map'''
@@ -226,8 +229,7 @@ class Map:
                    'dmg': '- DAMAGE = '
                }[x] + additional
 
-        # MESSAGING
-        # STATS
+
     def hud(self, player):
         '''HEADS UP DISPLAY : TEN LINES X48 CHARACTERS
         
@@ -381,7 +383,6 @@ class Map:
             self.message_key[0] = 'g5'
         elif thisrow == ' x':
             player.re_equip()
-            # player.inventory[0] = self.new_weapon_fn_ref(self.level_fn())
             self.message_key[0] = 'looted'
         else:
             self.message_key[0] = ''
@@ -399,6 +400,7 @@ class Map:
 
 
     def unobstructed(self, arg):
+        '''CHECK FOR OBSTRUCTION TO MOVEMENT'''
         print(arg)
         if arg == " #":
             return False
@@ -418,7 +420,7 @@ class Map:
         # INSERT CONDITIONALS FOR WALL ENCOUNTERS
         print("move arg: ", arg)
         temp_y0 = player.position[0]
-        temp_x1 = self.get_index_from_bit( player.position[1])
+        temp_x1 = self.get_index_from_bit(player.position[1])
         if arg == 2:  # 'n'
             if player.position[0] > 0:
                 temp_y0 += -1
@@ -456,7 +458,7 @@ class Map:
 
         elif arg == 4:  # 'w' | '4' :
             if player.position[1] < 1 << 23:
-                temp_x1 += 1
+                temp_x1 += -1
                 terr = self.map_rows[temp_y0][
                        (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
                 if self.unobstructed(terr):
@@ -472,7 +474,7 @@ class Map:
                     player.position[0] = player.position[0] - 1
 
             if player.position[1] < 1 << 23:
-                temp_x1 += 1
+                temp_x1 += -1
                 terr = self.map_rows[temp_y0][
                        (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
                 if self.unobstructed(terr):
@@ -501,7 +503,7 @@ class Map:
                 if self.unobstructed( terr ):
                     player.position[0] = player.position[0] + 1
             if player.position[1] < 1 << 23:
-                temp_x1 += 1
+                temp_x1 += -1
                 terr = self.map_rows[temp_y0][
                        (temp_x1 - 1) * 2: ((temp_x1 - 1) * 2) + 2]
                 if self.unobstructed(terr):
