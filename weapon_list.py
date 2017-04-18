@@ -34,11 +34,11 @@ Functions for creating our weapons
 '''
 
 
-def create_basic_weapon():
+def create_basic_weapon(lvl):
     return Items(random.choice(basic_weapons), 'basic weapon', random.randrange(1, 10) * lvl, random.randrange(1, 8))
 
 
-def create_common_weapon():
+def create_common_weapon(lvl):
     return Items(random.choice(common_weapons), 'common weapon', random.randrange(2, 10) * (lvl * 2),
                  random.randrange(1, 7))
 

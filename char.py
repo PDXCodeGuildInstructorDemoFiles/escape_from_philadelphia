@@ -1,10 +1,13 @@
 from char_class import CharacterAttributes
+from inventory import Inventory
 
 
 class Character:
     def __init__(self, name):
         self.name = name
         self.cls = self.choose_class()
+        self.inv = self.create_inv()
+        self.level = 1
 
     def choose_class(self):
         print('Press 1 for Nuke Elf, 2 for Human, 3 for Zombie')
@@ -12,9 +15,12 @@ class Character:
         q = int(input('What class do you choose? '))
         return CharacterAttributes(d[q])
 
-q = input('Hello what is your name? ')
-player = Character(q)
+    def create_inv(self):
+        return Inventory('player bag', 50)
 
-print(player.name)
-print(player.cls.name)
+if __name__ == '__main__':
+    q = input('Hello what is your name? ')
+    player = Character(q)
 
+    print(player.name)
+    print(player.cls.name)

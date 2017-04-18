@@ -16,8 +16,9 @@ class Inventory:
 
     def place_item(self, item):
         for k, v in self.inv.items():
-            if v is None:
+            if v is None and self.weight - item.weight > 0:
                 self.inv[k] = item
+                self.weight -= item.weight
                 break
 
     def __str__(self):
@@ -28,19 +29,20 @@ class Inventory:
 
         # def use_item(self):
 
+if __name__ == '__main__':
 
-armor = create_basic_armor()
+    armor = create_basic_armor()
 
-inventory = Inventory('player bags', 50)
-print(inventory.inv)
-inventory.place_item(armor)
-print(inventory.inv)
+    inventory = Inventory('player bags', 50)
+    print(inventory.inv)
+    inventory.place_item(armor)
+    print(inventory.inv)
 
-# char_inv = []
-# knife = Inventory(1,"knife","wep",5)
-# gun = Inventory(2, "gun", "wep", 1)
-#
-# char_inv.append(gun)
-# char_inv.append(knife)
-# for x in char_inv:
-#     print(x)
+    # char_inv = []
+    # knife = Inventory(1,"knife","wep",5)
+    # gun = Inventory(2, "gun", "wep", 1)
+    #
+    # char_inv.append(gun)
+    # char_inv.append(knife)
+    # for x in char_inv:
+    #     print(x)
