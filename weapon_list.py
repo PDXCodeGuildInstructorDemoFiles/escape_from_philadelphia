@@ -87,7 +87,7 @@ def create_weapon():
     elif luck in range(85, 97):
         return create_epic_weapon()
     else:
-        if luck in range(97, 101):
+        luck in range(97, 101):
             return create_legendary_weapon()
 
 def create_armor():
