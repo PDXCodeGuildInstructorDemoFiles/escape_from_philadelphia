@@ -287,7 +287,7 @@ class Map:
             print("################################################## ")
         elif self.head[0] == 3:
 
-            print("Killed by level {} {}.  Don't forget to heal!".format(self.level_fn(), monsters[0].type))
+            print("Killed by level {} {}.  Don't forget to heal!".format(self.level_fn(), self.get_monsters()[0].type))
             print("################################################## ")
             print("################################################## ")
             print("################################################## ")

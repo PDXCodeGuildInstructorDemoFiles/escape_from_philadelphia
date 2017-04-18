@@ -303,7 +303,7 @@ player = Player()
 def get_monsters_fn():
     return monsters
 
-map = Map(player, monsters, monster_attack, get_level,  get_lives_func, get_monsters_fn)
+map = Map(player, monsters, monster_attack, get_level, get_lives_func, get_monsters_fn)
 map.mapit(player, monsters)
 
 
