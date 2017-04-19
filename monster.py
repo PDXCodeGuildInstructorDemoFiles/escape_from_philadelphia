@@ -33,7 +33,7 @@ class Monster:
             (" £", ".,•º∞*:"),
             (" ƒ", " .,•º∞*:"),
             (" §", ".,•º∞*: .")
-        ][randrange(25)  % 10]
+        ][randrange(25) % 10]
 
 
     def generate_monster(level):
