@@ -1,4 +1,5 @@
 from random import choice
+import Map_renderer from map_renderer
 
 #######################################################
 # WORKING ON WALLS -JH
@@ -255,7 +256,7 @@ class Map:
                                                     player.health,
                                                     self.message(self.message_key[2][:3],
                                                                  self.message_key[2][self.message_key[2].find(' '):])))
-        print("RIGHT: {}    GOLD  : {} ".format(player.inventory[1]['name'], player.gold))
+        print("RIGHT: {}({})    GOLD  : {} ".format(player.inventory[1]['name'], player.inventory[1]['block'],  player.gold))
         # print(":POTION ^(f)                  (r)^ STAFF:")
         print(self.message(self.message_key[1]), self.message(self.message_key[0]))
 
@@ -267,7 +268,7 @@ class Map:
             if c == 1 << i:
                 return self.MAP_SIZE - i
 
-    def header(self):
+    def header(self, player={}):
         '''PRINTS HEADER'''
         # print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
         self.frame_i[0] += 1
@@ -375,6 +376,10 @@ class Map:
             self.message_key[0] = 'g5'
         elif thisrow == ' x':
             player.re_equip()
+            self.message_key[0] = 'looted'
+        elif thisrow == ' X':
+            player.re_equip()
+            player.gold += 5000
             self.message_key[0] = 'looted'
         else:
             self.message_key[0] = ''

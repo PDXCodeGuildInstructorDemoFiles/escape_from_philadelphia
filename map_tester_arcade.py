@@ -97,17 +97,17 @@ class Monster:
 
     def m_type(self):
         return [
-            ('Lizard Man', " §", ".,• º∞* xXX"),
-            ('Dragon Breath', " £", ".,•º ∞* xXX"),
-            ('Kraken', " §", ".,•º ∞*: xXX"),
-            ('Mage', " π", " ,º ∞* .; xXX"),
-            ('Sith Lord', " £", " .,*; xXX"),
-            ('Skeleton', " ¥", ". •* xXX"),
-            ('Wizard', " π", " .,•º∞*; xXX"),
-            ('Lock Ness', " ∫", ".,• º∞*; xXX"),
-            ('T-Rex', " £", ".,•º∞*: xXX"),
-            ("C'Thulu", " ƒ", " .,•º∞*: xXX"),
-            ('Hydra', " §", ".,•º∞*: . xXX")
+            ('Lizard Man', " §", ".,• º∞*.  xXX"),
+            ('Dragon Breath', " £", ".,•º #∞*  xXX"),
+            ('Kraken', " §", ".,•º #∞*:  xXX"),
+            ('Mage', " π", " ,º ∞* .;  xXX"),
+            ('Sith Lord', " £", " .,*;  xXX"),
+            ('Skeleton', " ¥", ". •*#  xXX"),
+            ('Wizard', " π", " .,•º∞*;  xXX"),
+            ('Lock Ness', " ∫", ".,• º∞*;  xXX"),
+            ('T-Rex', " £", ".,•º∞ *:  xXX"),
+            ("C'Thulu", " ƒ", " .#,•º∞*:  xXX"),
+            ('Hydra', " §", ".,•º∞*: .  xXX")
         ][randrange(25)  % 10]
 
     def w_name(self):
@@ -203,7 +203,7 @@ def game_over(win):
             map.reincarnate(player, monsters)
         else:
             map.head[0] = 3
-            map.header()
+            map.header(player)
             quit()
 
 
@@ -309,10 +309,6 @@ map.mapit(player, monsters)
 
 
 
-
-
-# Engine
-# USER INPUT LOOP
 while True:
     command = input("Type Command: ( n s e w a(t)tack cast heal x:exit )\n>>> ")
 
