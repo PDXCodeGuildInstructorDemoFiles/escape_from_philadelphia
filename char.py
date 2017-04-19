@@ -10,8 +10,9 @@ class Character:
         self.level = 1
 
     def choose_class(self):
-        print('Press 1 for Nuke Elf, 2 for Human, 3 for Zombie')
-        d = {1: 'nuke_elf', 2: 'human', 3: 'zombie'}
+        print('''Press 1 for Nuke Elf, 2 for Human, 3 for Zombie, 4 for Lemur, 5 for Gorilla, 6 for Cyborg, '
+              7 for Technovore, 8 for Mid-night Elf or 9 for Bear''')
+        d = {1: 'nuke_elf', 2: 'human', 3: 'Charasaurus Rex: First Bite', 4: ''}
         q = int(input('What class do you choose? '))
         return CharacterAttributes(d[q])
 

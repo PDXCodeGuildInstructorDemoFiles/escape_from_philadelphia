@@ -1,5 +1,5 @@
 from random import choice
-import Map_renderer from map_renderer
+# import Map_renderer from map_renderer
 
 #######################################################
 # WORKING ON WALLS -JH
