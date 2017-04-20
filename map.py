@@ -2,7 +2,6 @@ from random import choice
 # import Map_renderer from map_renderer
 
 #######################################################
-# WORKING ON WALLS -JH
 
 # RECEIVE DIRECTIVES FOR MOVEMENT
 # GENERATE MAP
@@ -36,6 +35,21 @@ class Map:
         self.message_key = ['', '', '']
         self.this_monster = [0]
         self.monster_modes = ['ROAM', 'FIGHT']
+
+
+
+        '''
+        EXPAND MAPS
+        012
+        345
+        678
+        '''
+        self.maps = [[[],[],[]],[[],[],[]],[[],[],[]]]
+        self.maps[1][1] = self.map_rows
+        self.current_map = [1,1]
+
+        print( self.maps[self.current_map[0]][self.current_map[1]] )
+
 
 
     def initialize_map(self):
@@ -309,6 +323,8 @@ class Map:
             print("######################################## Move Key: 123 | 123")
             print("################ A D V E N T U R E ##### n s e w # q*e | 4*6")
             print("################################################## asd | 789")
+            print("#####################MAP{}:{}##################### ".format(self.current_map[0], self.current_map[1]))
+
         elif self.head[0] == 1:
             print("################################################## ")
             print("################# A SPELL IS CAST ################ ")
