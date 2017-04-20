@@ -98,15 +98,15 @@ class Monster:
     def m_type(self):
         return [
             ('Lizard Man', " §", ".,• º∞*.  xXX"),
-            ('Dragon Breath', " £", ".,•º #∞*  xXX"),
-            ('Kraken', " §", ".,•º #∞*:  xXX"),
+            ('Dragon Breath', " £", ".,•º ∞#*  xXX"),
+            ('Kraken', " §", ".,•º ∞*:  xXX"),
             ('Mage', " π", " ,º ∞* .;  xXX"),
             ('Sith Lord', " £", " .,*;  xXX"),
-            ('Skeleton', " ¥", ". •*#  xXX"),
-            ('Wizard', " π", " .,•º∞*;  xXX"),
+            ('Skeleton', " ¥", ". •*  xXX"),
+            ('Wizard', " π", " .,•º∞*;#  xXX"),
             ('Lock Ness', " ∫", ".,• º∞*;  xXX"),
             ('T-Rex', " £", ".,•º∞ *:  xXX"),
-            ("C'Thulu", " ƒ", " .#,•º∞*:  xXX"),
+            ("C'Thulu", " ƒ", " .,•º∞*:  xXX"),
             ('Hydra', " §", ".,•º∞*: .  xXX")
         ][randrange(25)  % 10]
 
@@ -246,10 +246,12 @@ def player_attack(arg):
 ########################################################################
 def heal_self(arg='9'):
     print(arg)
-    player.gold = player.gold - int(arg)
-    player.health = player.health + int(arg)
-    #self.monster_go()
-    map.monster_go(player, monsters)
+    try:
+        player.gold = player.gold - int(arg)
+        player.health = player.health + int(arg)
+    except:
+        #self.monster_go()
+        map.monster_go(player, monsters)
 
 def cast_spell(spell=''):
     if spell[:5] == 'black' and player.gold > 60:

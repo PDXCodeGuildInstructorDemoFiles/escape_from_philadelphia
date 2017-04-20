@@ -118,7 +118,6 @@ class Map:
         #
 
 
-
     def monster_go(self, player, monsters):
         '''MONSTERS TURN DETERMINATION'''
 
@@ -143,7 +142,13 @@ class Map:
                 self.this_monster[0] = m
                 self.monster_attack(m)
 
-
+    def unobstructed(self, arg):
+        '''CHECK FOR OBSTRUCTION TO MOVEMENT'''
+        print(arg)
+        if arg == " #":
+            return False
+        else:
+            return True
 
     def monster_move(self, monsters, mm=0):
         '''maps the monster to a new position on map'''
@@ -153,23 +158,49 @@ class Map:
         mon_row = monsters[m].position[0]
         mon_col = monsters[m].position[1]
         # mon_ind = MAP_SIZE - mon_row
+
+        rand_verticle = choice([-1, 0, 1])
+        rand_horizontal = choice([-1, 0, 1])
+
+        proposed0 = 0
+        proposed1 = 0
+
         mon_colm = mon_col
         if monsters[m].position[0] < 1:
             monsters[m].position[0] = 1
         elif monsters[m].position[0] > 22:
             monsters[m].position[0] = 22
+
+
         else:
-            monsters[m].position[0] += choice([-1, 0, 1])
+            # monsters[m].position[0] += choice([-1, 0, 1])
+            proposed0 = monsters[m].position[0] + rand_horizontal
+        #
         if monsters[m].position[1] < 2:
             monsters[m].position[1] = 2
         elif monsters[m].position[1] > 22:
             monsters[m].position[1] = 22
+
+
         else:
-            monsters[m].position[1] += choice([-1, 0, 1])
+            # monsters[m].position[1] += choice([-1, 0, 1])
+            proposed1 = monsters[m].position[1] + rand_verticle
+        #
+        proposed_terr = self.map_rows[proposed0][(proposed1 - 1) * 2: ((proposed1 - 1) * 2) + 2]
+        # print("proposed_terr : '{}' ".format( proposed_terr) )
+        # if " #" != proposed_terr:
+        if self.unobstructed(proposed_terr):
+            # print("proposed_terr : ' #' is not '{}' ".format(proposed_terr))
+            monsters[m].position[0] += rand_horizontal
+            monsters[m].position[1] += rand_verticle
+
+
+
         newrow = self.map_rows[mon_row][: (mon_colm - 1) * 2]
 
         ##### THIS IS THE TEST: ######################
-        terr = self.map_rows[mon_row][(monsters[m].position[1] - 1) * 2: ((monsters[m].position[1] - 1) * 2) + 2]
+        # terr = self.map_rows[mon_row][(monsters[m].position[1] - 1) * 2: ((monsters[m].position[1] - 1) * 2) + 2]
+        terr = self.map_rows[monsters[m].position[0]][(monsters[m].position[1] - 1) * 2: ((monsters[m].position[1] - 1) * 2) + 2]
         ##############################################
 
         # terr_prog = ".,•º∞*"
@@ -230,15 +261,15 @@ class Map:
         print("################################################# ")
 
         print("# ")
-        print("# ")
-        print("# ")
-        print("# ")
-        print("# ")
-        print("# ")
-        print("# ")
-        print("# ")
-        print("# ")
-        print("# ")
+        # print("# ")
+        # print("# ")
+        # print("# ")
+        # print("# ")
+        # print("# ")
+        # print("# ")
+        # print("# ")
+        # print("# ")
+        # print("# ")
         # print("# {}".format())
         # print("# {}".format())
         # print("# {}".format())
@@ -396,13 +427,6 @@ class Map:
         self.hud(player)
 
 
-    def unobstructed(self, arg):
-        '''CHECK FOR OBSTRUCTION TO MOVEMENT'''
-        print(arg)
-        if arg == " #":
-            return False
-        else:
-            return True
 
         # CALCULATE TRANSLATION OF position
     def move(self, arg, player, monsters):
