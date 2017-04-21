@@ -21,10 +21,10 @@ class CharacterAttributes:
             'charasaurus_rex:_first_bite': self.zombie,
             'huey_the_furious_furry_ruffed_lemur_of_acrimonious_vengeance': self.lemur,
             'motuba_the_gorilla_guardian_of_the_broad_street_subway_band': self.gorilla,
-            'cyborg': self.cyborg,
-            'technovore': self.technovore,
-            'midnight_elf': self.midnight_elf,
-            'bear': self.bear
+            'cyborg_cyndi:_iron_woman': self.cyborg,
+            'electro_slug_@_south_street': self.technovore,
+            'the_marauding_midnight_elf': self.midnight_elf,
+            'warrior_samurai_bear': self.bear
         }
         classes[slug]()
 

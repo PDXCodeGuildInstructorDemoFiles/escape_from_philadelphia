@@ -20,22 +20,6 @@ class Monster:
         return 'hp: {}, strength: {}, armor: {}, magic: {}'.format(self.hp, self.strength, self.armor, self.magic)
 
 
-    def m_type(self):
-        return [
-            (" §", ".,• º∞* xXX"),
-            (" £", ".,•º ∞* xXX"),
-            (" §", ".,•º ∞*:"),
-            (" π", " ,º ∞* .;"),
-            (" £", " .,*;"),
-            (" ¥", ". •* xXX"),
-            (" π", " .,•º∞*;"),
-            (" ∫", ".,• º∞*;"),
-            (" £", ".,•º∞*:"),
-            (" ƒ", " .,•º∞*:"),
-            (" §", ".,•º∞*: .")
-        ][randrange(25) % 10]
-
-
     def generate_monster(level):
         '''generates a monster based on certain ranges corresponding to a level as determined at some later time'''
         hp = randrange(40,100) * level
@@ -43,8 +27,7 @@ class Monster:
         armor = int(round((hp * strength) / 200, 0))
         magic = randrange(40,100)
 
-        new_monster = Monster(hp, strength, armor, magic)
-
+        # new_monster = Monster(hp, strength, armor, magic)
 
     generate_monster(1)
 
@@ -81,30 +64,6 @@ class Monster:
 
 
     change_of(adjectives, monster, place_names)
-
-class Character:
-    '''a basic outline for character attributes'''
-    def __init__(self, boots, gloves, pants, chest_plate, name, ability):
-        self.boots = None
-        self.gloves = None
-        self.pants = None
-        self.chest_plate = None
-        self.name = None
-        self.ability = None
-
-    def __str__(self):
-        return 'boots: {}, gloves: {}, pants: {}, chest_plate: {}, name: {}, ability: {}'.format(self.boots, self.gloves, self.pants, self.chest_plate, self.name, self.ability)
-
-
-
-
-
-
-
-
-
-
-
 
 
 # rat_king = Monster(100, 20, 100, 5, 'sword', 3)
