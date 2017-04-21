@@ -6,7 +6,7 @@ master_list = {
     'basic_armor': ['Construction Chaps', 'Motorcycle Helmet', 'Leather Gloves', 'Welding Helmet'],
     'common_armor': ['Kevlar Vest', 'Iron Chest Plate', 'Steel Toe Boots'],
     'rare_armor': ['Bullet Proof Suit', 'Viking Helmet', 'Steel Chest Plate'],
-    'epic_armor': ['Titanium Cuffs', 'Mech Body Armor'],
+    'epic_armor': ['Titanium Cuffs', 'Mech Body Armor', 'Force Reduction Apparatus'],
     'legendary_armor': ['Plasma shield', 'Obsidian Chest Plate'],
     'basic_weapon': ['Baseball Bat', 'Crow Bar', 'Hunting Knife', 'Pepper Spray'],
     'common_weapon': ['.22 Pistol', 'Pump Shotgun', 'Crossbow'],
@@ -20,51 +20,51 @@ def create_basic(type, lvl):
                  random.randrange(1, 8))
 
 def create_common(type, lvl):
-    return Items(random.choice(master_list['common_' + str(type)]), 'common' + str(type),
+    return Items(random.choice(master_list['common_' + str(type)]), 'common ' + str(type),
                  random.randrange(2, 10) * (lvl * 1.5), random.randrange(1, 7))
 
 def create_rare(type, lvl):
-    return Items(random.choice(master_list['rare_' + str(type)]), 'rare' + str(type),
+    return Items(random.choice(master_list['rare_' + str(type)]), 'rare ' + str(type),
                  random.randrange(3, 10) * (lvl * 2), random.randrange(1, 6))
 
 def create_epic(type, lvl):
-    return Items(random.choice(master_list['epic_' + str(type)]), 'epic' + str(type),
+    return Items(random.choice(master_list['epic_' + str(type)]), 'epic ' + str(type),
                  random.randrange(4, 10) * (lvl * 3), random.randrange(1, 5))
 
 def create_legendary(type, lvl):
-    return Items(random.choice(master_list['legendary_' + str(type)]), 'legendary' + str(type),
+    return Items(random.choice(master_list['legendary_' + str(type)]), 'legendary ' + str(type),
                  random.randrange(5, 12) * (lvl * 5), random.randrange(1, 3))
 
 
-def create_weapon():
+def create_weapon(lvl):
     luck = random.randrange(1, 101)
     if luck in range(1, 50):
-        return create_basic('weapon', 1)
+        return create_basic('weapon', lvl)
     elif luck in range(50, 75):
-        return create_common('weapon', 1)
+        return create_common('weapon', lvl)
     elif luck in range(75, 85):
-        return create_rare('weapon', 1)
+        return create_rare('weapon', lvl)
     elif luck in range(85, 98):
-        return create_epic('weapon', 1)
+        return create_epic('weapon', lvl)
     elif luck in range(98, 101):
-        return create_legendary('weapon', 1)
+        return create_legendary('weapon', lvl)
 
 # CODE TESTING
 # weapon1 = create_weapon()
 # print(weapon1)
 
-def create_armor():
+def create_armor(lvl):
     luck = random.randrange(1, 101)
     if luck in range(1, 50):
-        return create_basic('armor', 1)
+        return create_basic('armor', lvl)
     elif luck in range(50, 75):
-        return create_common('armor', 1)
+        return create_common('armor', lvl)
     elif luck in range(75, 85):
-        return create_rare('armor', 1)
+        return create_rare('armor', lvl)
     elif luck in range(85, 97):
-        return create_epic('armor', 1)
+        return create_epic('armor', lvl)
     elif luck in range(97, 101):
-        return create_legendary('armor', 1)
+        return create_legendary('armor', lvl)
 
 
 '''
@@ -74,7 +74,7 @@ a very rare chance of landing on something rare
 '''
 
 
-def create_first_aid():
+def create_first_aid(lvl):
     random_number = random.triangular(1, 50, 20)
     aid_level = math.trunc(random_number)
     water_range = random.randrange(1, 5)
