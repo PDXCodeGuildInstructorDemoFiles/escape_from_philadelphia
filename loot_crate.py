@@ -53,20 +53,23 @@ class VendMachine:
             play = input(
                 "Welcome to the Loot'O'Matic vending machine! (B)uy, (S)ell, (E)xit: ").upper()
             if play == 'B':
-                for k, v in self.rewards.items():
-                    print('{}:{}'.format(k, v))
-                rchoice = int(input('Look at those amazing choices. Which one do you want?: '))
-                if coin >= self.rewards[rchoice].cost:
-                    print('You take {}.'.format(self.rewards[rchoice].name))
-                    coin -= self.rewards[rchoice].cost
-                    print('You have ${} left.'.format(coin))
-                    return self.rewards[rchoice]
-                else:
-                    print('You do not have enough money, haha!')
+                self.buy_item()
             elif play == 'S':
-
-            else:g
+                self.sell_item()
+            else:
                 active = False
+
+    def buy_item(self):
+        for k, v in self.rewards.items():
+            print('{}:{}'.format(k, v))
+        rchoice = int(input('Look at those amazing choices. Which one do you want?: '))
+        if coin >= self.rewards[rchoice].cost:
+            print('You take {}.'.format(self.rewards[rchoice].name))
+            coin -= self.rewards[rchoice].cost
+            print('You have ${} left.'.format(coin))
+            return self.rewards[rchoice]
+        else:
+            print('You do not have enough money, haha!')
 
 slot1 = VendMachine('here', 2)
 slotif = slot1.vend_interface()
