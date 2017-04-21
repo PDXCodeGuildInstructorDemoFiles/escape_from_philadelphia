@@ -47,3 +47,5 @@ if __name__ == '__main__':
     include_name(player)
 
 
+    def generate_character():
+

@@ -2,17 +2,17 @@ from random import randrange, choice
 #
 class Monster:
     '''this is intended as a base attribute list for our monsters'''
-    def __init__(self, hp, strength, armor, magic):
+    def __init__(self):
         """be sure to add weapons back into the function down the road.  
         add attribute position which will be a list where 0 = y & 1 = x.  
         this will be come clear later."""
 
         self.mode = None #'ROAM' also includes 'FIGHT' when one must fight - function to follow?
         self.avatar = None
-        self.hp = hp
-        self.strength = strength
-        self.armor = armor
-        self.magic = magic
+        self.hp = None
+        self.strength = None
+        self.armor = None
+        self.magic = None
         # self.m_typ = self.m_type() #touch base with Joe re: this and the succeeding attribute
         # self.biom = self.m_typ
 
@@ -20,24 +20,29 @@ class Monster:
         return 'hp: {}, strength: {}, armor: {}, magic: {}'.format(self.hp, self.strength, self.armor, self.magic)
 
 
-    def generate_monster(level):
+    def generate_monster(self, level):
         '''generates a monster based on certain ranges corresponding to a level as determined at some later time'''
-        hp = randrange(40,100) * level
-        strength = randrange(60,100)
-        armor = int(round((hp * strength) / 200, 0))
-        magic = randrange(40,100)
+        self.hp = randrange(40,100) * level
+        self.strength = randrange(60,100)
+        self.armor = int(round((self.hp * self.strength) / 200, 0))
+        self.magic = randrange(40,100)
+        self.name = 'Nuke Elf'
+        self.exp = randrange(1, 15)
+        self.stamina = randrange(10, 20)
+        self.intelligence = randrange(7, 15)
 
-        # new_monster = Monster(hp, strength, armor, magic)
+    #     new_monster = (hp + strength + armor + magic)
+    #     print(new_monster)
+    #
+    # generate_monster(1)
 
-    generate_monster(1)
 
 
-
-    adjectives = choice(['aggravating', 'annoying', 'distressing', 'disturbing', 'inconvenient', 'arduous', 'backbreaker',
-                'bothersome', 'troublesome', 'irritating', 'troublesome', 'vexing', 'exasperating',
-                'incommodious', 'remote', 'vexatious', 'ambitious', 'demanding', 'difficile', 'effortful', 'exacting',
-                'wearisome', 'formidable', 'galling', 'onerous', 'operose', 'painful', 'problem', 'problematic',
-                'prohibitive', 'rigid', 'severe', 'strenuous', 'titanic', 'toilsome', 'tough', 'trying', 'unyielding', 'uphill',
+    adjectives = choice(['aggravating', 'annoying', 'distressing', 'disturbing', 'inconvenient', 'arduous',
+                'bothersome', 'troublesome', 'irritating', 'troublesome', 'vexing', 'exasperating', 'rebarbative incommodious',
+                'remote', 'vexatious', 'ambitious', 'demanding', 'difficile', 'exacting',
+                'wearisome', 'formidable', 'galling', 'onerous', 'operose', 'painful', 'problematic',
+                'prohibitive', 'rigid', 'severe', 'strenuous', 'titanic', 'toilsome', 'tough', 'trying', 'unyielding',
                 'burdensome', 'challenging', 'crucial', 'gargantuan', 'heavy', 'herculean', 'immense', 'irritating',
                 'labored', 'laborious'])
 
@@ -66,8 +71,9 @@ class Monster:
     change_of(adjectives, monster, place_names)
 
 
-# rat_king = Monster(100, 20, 100, 5, 'sword', 3)
+rat_king = Monster()
+rat_king.generate_monster(1)
+print(rat_king.hp)
 # print(rat_king.magic)
-
 
 
