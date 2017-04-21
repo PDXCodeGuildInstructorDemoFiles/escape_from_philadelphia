@@ -108,7 +108,7 @@ class Monster:
             ('T-Rex', " £", ".,•º∞ *:  xXX"),
             ("C'Thulu", " ƒ", " .,•º∞*:  xXX"),
             ('Hydra', " §", ".,•º∞*: .  xXX")
-        ][randrange(25)  % 10]
+        ][randrange(25) % 10]
 
     def w_name(self):
         return [
@@ -121,13 +121,13 @@ class Monster:
             'Spike',
             'Hatchet',
             'Chainsaw'
-        ][randrange(23)  % 9]
+        ][randrange(23) % 9]
 
 
 
 
 class Player:
-    def __init__(self, health=100, gold=5, name='Zork', lvl=1, init_position=[10, 1024]):
+    def __init__(self, health=100, gold=5, name='Zork', lvl=1, init_position=[12, 12]):
         self.position = init_position
         # self.position = [10, 1024]
         self.name = name
@@ -168,7 +168,7 @@ class Player:
 
 def check_proximity(arg=2):
 
-    for m in range(2):
+    for m in range(len(monsters)):
         if abs(monsters[m].position[0] - player.position[0]) < arg and arg > abs(
                     monsters[m].position[1] - map.get_index_from_bit(player.position[1])):
             this_monster[0] = m
@@ -177,22 +177,29 @@ def check_proximity(arg=2):
 
 
 def check_death(arg):
-    if arg < 0:
-        return True
-    return False
+    return arg < 0
+    #     return True
+    # return False
 
+#
+#
+# def check_death(arg):
+#     if arg < 0:
+#         return True
+#     return False
+#
 
 def game_over(win):
     if win:
         map.head[0] = 4
         m0 = monsters[this_monster[0]].position[0]
         m1 = monsters[this_monster[0]].position[1]
-        new_row = map.map_rows[m0][:(m1 - 1) * 2]
+        new_row = map.maps[map.current_map[0]][map.current_map[1]][m0][:(m1 - 1) * 2]
         new_row += ' x'
-        new_row += map.map_rows[m0][m1 * 2:]
+        new_row += map.maps[map.current_map[0]][map.current_map[1]][m0][m1 * 2:]
         map.message_key[1] = 'killedit'
         # map.message_key[1] = 'killedit'
-        map.map_rows[m0] = new_row
+        map.maps[map.current_map[0]][map.current_map[1]][m0] = new_row
 
         # determine which monster
         z = monsters.pop(this_monster[0])
@@ -298,7 +305,7 @@ def cast_spell(spell=''):
 ########################################################################
 
 
-monsters = [Monster(1), Monster(1)]
+monsters = [Monster(1), Monster(1), Monster(1)]
 player = Player()
 
 
