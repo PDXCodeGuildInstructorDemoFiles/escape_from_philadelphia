@@ -119,3 +119,5 @@ class CharacterAttributes:
         self.strength = randrange(15, 30)
         self.magic = randrange(10, 17)
         self.intelligence = randrange(7, 25)
+
+

@@ -11,6 +11,7 @@ def genMonstername():
             "stiff”, “strenuous”, “titanic”, “toilsome”, “tough”, “trying”, “unyielding”, “uphill”,
             "upstream”, “burdensome”, “challenging”, “crucial”, “gargantuan”, “heavy”,
             "herculean"", “immense”, “intricate”, “irritating”, “labored”, “laborious”]
+
     list2 = ["Rabbit", "Troll", "Dragon", "Camel", "Llama", "Ogre", "Slime Mold", "Fungal Beast", "Vampire", "Dampyr", "Malformed animal", "Shark Rocket", "Tengu", "Zombie", "Shadow", "Dragon", "Gaslich", "Hollowlich", "Embermask", "Bowelwraith", "Biters", "Cold Bodies",    CREEPER    DEAD ONES    FLOATERS    GEEK    LAMEBRAINS    LURKERS    Screaker    Weeper    Tearer    Courier    Crowd Zombie    Gagger    Blaster    Licker    Spasm Zombie    Scourge    wolf Warg    Water Hag    Wham-a-Wham    Woodland Spirit    Wraith    Wyvern    foglet    Tangalore     "Therazane","Apiarian Phantom""]
     list3 = ['Frankfurter Ave.', 'the Passyunk Warrior Clan', 'the Philly Cheesesteak Factory',
                'Manayunk Railroad Yard','Skidoo Water Park Palace', 'Dunks Ferry Playground', 'Pigeons\' GauntleCREEPER    DEAD ONES    FLOATERS    GEEK    LAMEBRAINS    LURKERS    Screaker    Weeper    Tearer    Courier    Crowd Zombie    Gagger    Blaster    Licker    Spasm Zombie    Scourge    wolf Warg    Water Hag    Wham-a-Wham    Woodland Spirit    Wraith    Wyvern    foglet    Tangalore     "Therazane","Apiarian Phantom""]

@@ -71,9 +71,10 @@ class Monster:
     change_of(adjectives, monster, place_names)
 
 
-rat_king = Monster()
-rat_king.generate_monster(1)
-print(rat_king.hp)
-# print(rat_king.magic)
+if __name__ == "__main__":
+    rat_king = Monster()
+    rat_king.generate_monster(1)
+    print(rat_king.hp)
+    # print(rat_king.magic)
 
 

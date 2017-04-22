@@ -32,7 +32,7 @@ class Map:
         self.map_rows = self.initialize_map(4)  # []
         self.frame_i = [0]
         self.head = [0]
-        self.message_key = ['', '', '']
+        self.message_key = ['', '', '', '']
         self.this_monster = [0]
         self.monster_modes = ['ROAM', 'FIGHT']
 
@@ -103,7 +103,7 @@ class Map:
             mp.append(" # . . . . . . # . . . . . . . . . # . . . . . .")
             mp.append(" # . . . . . . # . . . . . . . . . # . . . . . .")
             mp.append(" # . . . . . . . . # . . . . . . . . . . . . . .")
-            mp.append(" # # # # # # # # # # # # # # # . # # . . . . . .")
+            mp.append(" # . . . . . . . . # . . . . . . . . . . . . . .")
             mp.append(" # . . . . . . # . . . . . . . . . # # # . # # .")
             mp.append(" # . . . . . . # . . . . . . . . . # . . . . . .")
             mp.append(" # . . . . . . # . . . . . . . . . . . ; * ; ; .")
@@ -114,7 +114,7 @@ class Map:
             mp.append(" # . . . . . . # . . . . . . . . . # . * * * * .")
             mp.append(" # # # . # # # # . . . . . . . . . # . * * * * .")
             mp.append(" # . . . . . . # . . . . . . . . . # . * * * * .")
-            mp.append(" # . . . . . . # # # # # # # # . # # . * * * * .")
+            mp.append(" # . . . . . . # . . . . . . . . . # . * * * * .")
             mp.append(" # . . . . . . . . . . . . . . . . . . . . . . .")
             mp.append(" # . . . . . . . . . . . . . . . . . . . . . . .")
 
@@ -132,13 +132,13 @@ class Map:
             mp.append(" # . . . . . . . . # . . . . . . . . . . . . . .")
             mp.append(" # # # # # # # # # # # # # # # . # # . . . . . .")
             mp.append(" # . . . . . . # . . . . . . . . . # # # . # # .")
-            mp.append(" # . . . . . . # . . . . . . . . . # . . . . . .")
-            mp.append(" # . . . . . . # . . . . . . . . . # . ; * ; ; .")
-            mp.append(" # . . . . . . # . . . . . . . . . # . ; * ; ; .")
-            mp.append(" # . . . . . . . . . . . X X . . . # . ; * ; ; .")
-            mp.append(" # . . . . . . # . . . . X X . . . # . * * * * .")
-            mp.append(" # . . . . . . # . . . . . . . . . # . * * * * .")
-            mp.append(" # . . . . . . # . . . . . . . . . ; . * * * * .")
+            mp.append(" # . . . . . . # . . # . . . . . . # . . . . . .")
+            mp.append(" # . . . . . . # . . # . . . . . . # . ; * ; ; .")
+            mp.append(" # . . . . . . # . . # . . . . . . # . ; * ; ; .")
+            mp.append(" # . . . . . . . . . # . X X . . . # . ; * ; ; .")
+            mp.append(" # . . . . . . # . . # . X X . . . # . * * * * .")
+            mp.append(" # . . . . . . # . . # . . . . . . # . * * * * .")
+            mp.append(" # . . . . . . # . . # . . . . . . ; . * * * * .")
             mp.append(" # # # . # # # # . . . . . . . . . # . * * * * .")
             mp.append(" # . . . . . . # . . . . . . . . . # . * * * * .")
             mp.append(" # . . . . . . # # # # # # # # # # # . * * * * .")
@@ -155,7 +155,7 @@ class Map:
             mp.append(" . . . . . . . . . . . . . . . . . . . . . . . .")
             mp.append(" . # # # # # # # # # # # # # # # # # . . . . . .")
             mp.append(" . . . . . . . . . . . . . . . . . . # . . . . .")
-            mp.append(" . . . . . . . . . . . # . # . . . # . . . . . .")
+            mp.append(" . . . . . . . . . . . # . # . X . # . . . . . .")
             mp.append(" . . . . . . . . . . . . . # . X . # . . . . . .")
             mp.append(" . . . . . . . . . . . . # . . . . # . . . . . .")
             mp.append(" . . . . . . . . . . . . . # # # # # . . . . . .")
@@ -231,24 +231,24 @@ class Map:
         if x == 2:
             mp = []
             mp.append(" # # # # # # # # # # # # # # # # # # # # # # # #")
-            mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
-            mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
-            mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
-            mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
-            mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
+            mp.append(" . . . . . . . . . . . . . . . . . . . . . , X #")
+            mp.append(" . . . . . . . . . . . . . . . . . . . . . , , #")
+            mp.append(" . . . . . . . . . . . . . . . . . . . . . , . #")
+            mp.append(" . . . . . . . . . . . . . . . . . . . . . , . #")
+            mp.append(" . . . . . . . . . . . . . . . . . . . . , . . #")
             mp.append(" . # # # # # # # # # # # # # # # # # . . . . . #")
-            mp.append(" . . . . . . . . . . . . . . . . . . # . . . . #")
-            mp.append(" . . . . . . . . . . . # . # . . . # . . . . . #")
-            mp.append(" . . . . . . . . . . . . . # . X . # . . . . . #")
-            mp.append(" . . . . . . . . . . . . # . . . . # . . . . . #")
-            mp.append(" . . . . . . . . . . . . . # # # # # . . . . . #")
-            mp.append(" . . . . . . . . . . . # . . . . . . . . . . . #")
+            mp.append(" . . . . . . . . . . . . ; ; ; ; ; ; # . . . . #")
+            mp.append(" . . . . . . . . . . . # . # ; ; ; # . . . . . #")
+            mp.append(" . . . . . . . . . . . . . # ; ; ; # . . . . . #")
+            mp.append(" . . . . . . . . . ; ; . # . ; ; X # . . . . . #")
+            mp.append(" . . . . . . . . # . # . . # # # # # . . . . . #")
+            mp.append(" . . . . . . . . . . # # . . . . . . . . . . . #")
+            mp.append(" . . . . . . . . . # . . . . . . . . . . . . . #")
+            mp.append(" . . . . . . . . . . # . . . . . . . . . . . . #")
+            mp.append(" . . . . . . . . # . . . . . . . . . . . . . . #")
             mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
             mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
-            mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
-            mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
-            mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
-            mp.append(" # # # # # # # # # # # . # # # # # # # # # # # #")
+            mp.append(" # # # # # # # # # # # # # # # # # # # # # # # #")
             mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
             mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
             mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
@@ -291,23 +291,23 @@ class Map:
             mp.append(" . . . . . . . . . # . . . . . . . . . . . . . #")
             mp.append(" . . . . . . . . . # . . . . . . . . . . . . . #")
             mp.append(" . . . . . . . . . # . . . . . . . . . . . . . #")
+            mp.append(" . . . . . . . # # # # # # # # # # # . . . . . #")
+            mp.append(" . . . . . . . # . . . . . . . . . # . . . . . #")
+            mp.append(" . . . . . . . # . . . . . . . . . # . . X . . #")
+            mp.append(" . . . . . . . # . . . . . . # . . # . . . . . #")
+            mp.append(" . . . . . . . # . . . . . . # . . # # # # # # #")
+            mp.append(" . . . . . . . # . . . . . . # . . # . . . . . #")
+            mp.append(" . . . . . . . # . . . . . . # X . # . ; * ; ; #")
             mp.append(" . . . . . . . # # # # # # . # # # # . . . . . #")
-            mp.append(" . . . . . . . # . . . . . . . . . # . . . . . #")
-            mp.append(" . . . . . . . # . . . . . . . . . # . . . . . #")
-            mp.append(" . . . . . . . # . . . . . . . . . # . . . . . #")
-            mp.append(" . . . . . . . # . . . . . . . . . # # # # # # #")
-            mp.append(" . . . . . . . # . . . . . . . . . # . . . . . #")
-            mp.append(" . . . . . . . # . . . . . . . . . # . ; * ; ; #")
-            mp.append(" . . . . . . . # . . . . . . . . . # . ; * ; ; #")
-            mp.append(" . . . . . . . . . . . . . . . . . # . ; * ; ; #")
-            mp.append(" . . . . . . . # . . . . . . . . . # . * * * * #")
-            mp.append(" . . . . . . . # . . . . . . . . . # . * * * * #")
-            mp.append(" . . . . . . . # . . . . . . . . . # . * * * * #")
+            mp.append(" . . . . . . . # . . . . . . # X . # . ; * ; ; #")
+            mp.append(" . . . * * * * # . . . . . . # . . # . ; * ; ; #")
+            mp.append(" . . . * * * * # . . . . . . # . . # . X X X X #")
+            mp.append(" . . . * * * * # . . . . . . . . . # . X X X X #")
+            mp.append(" . . . . . . . # . . . . . . . . . # . X X X X #")
             mp.append(" # # # # # # # # . . . . . . . . . # . X X X X #")
-            mp.append(" . . . . . . . # . . . . . . . . . # . * * * * #")
-            mp.append(" . . . . . . . # # # # # . # # # # # . * * * * #")
-            mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
-            mp.append(" . . . . . . . . . . . . . . . . . . . . . . . #")
+            mp.append(" . . . . # . . # . . . . . . . . . # . * * * * #")
+            mp.append(" . . X X # . . # # # # # . # # # # # . * * * * #")
+            mp.append(" . . . . # . . . . . . . . . . . . . . . . . . #")
             mp.append(" # # # # # # # # # # # # # # # # # # # # # # # #")
 
         return mp
@@ -367,6 +367,7 @@ class Map:
 
         self.message_key[1] = ''
         self.message_key[2] = ''
+        self.message_key[3] = ''
         for m in range(len(monsters)):
             arg = 2
             if abs(monsters[m].position[0] - player.position[0]) < arg and arg > abs(
@@ -432,9 +433,9 @@ class Map:
         #
 
         try:
-            print('[proposed0][(proposed1  : {} , {} '.format(proposed0, proposed1 ) )
+            # print('[proposed0][(proposed1  : {} , {} '.format(proposed0, proposed1 ) )
             proposed_terr = self.maps[self.current_map[0]][self.current_map[1]][proposed0][(proposed1 - 1) * 2: ((proposed1 - 1) * 2) + 2]
-            print("proposed_terr : '{}' ".format( proposed_terr) )
+            # print("proposed_terr : '{}' ".format( proposed_terr) )
         except IndexError:
             proposed_terr = " ."
 
@@ -498,8 +499,8 @@ class Map:
                    'g5': 'Gained 5 Gold.',
                    'g1': 'Gained 1 Gold.',
 
-                   'm1': 'Fight monster: {} with {}({}) HP:{} '
-                       .format(self.get_monsters()[self.this_monster[0]].type, self.get_monsters()[self.this_monster[0]].inventory[0]['name'],
+                   'm1': 'Fight Monster with {}({}) HP:{} '
+                       .format( self.get_monsters()[self.this_monster[0]].inventory[0]['name'],
                                self.get_monsters()[self.this_monster[0]].inventory[0]['damage'], self.get_monsters()[self.this_monster[0]].health),
 
                    '.': 'Nothing to say.',
@@ -510,6 +511,8 @@ class Map:
 
                    'looted': 'You have looted the corpse',
                    'dmg': '- DAMAGE = '
+
+
                }[x] + additional
 
 
@@ -559,18 +562,30 @@ class Map:
         #         return self.MAP_SIZE - i
         return c
 
+    def story_line(self, X):
+
+        return {
+            'opening': "",
+            'middle': "",
+            'ending': "",
+            '': ''
+        }[X]
+
+
     def header(self, player={}):
         '''PRINTS HEADER'''
-        # print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
+
+        print(self.story_line(self.message_key[3]))
+
         self.frame_i[0] += 1
         print('Frame # {}  Level # {}   Lives : {} '.format(self.frame_i[0], self.level_fn() , self.get_lives() ))
 
         if self.head[0] == 0:
-            print("######################################## Move Key: 123 | 123")
-            print("################ A D V E N T U R E ##### n s e w # q*e | 4*6")
-            print("################################################## asd | 789")
+            print("########################################: 123 | 123")
+            print("##     ESCAPE FROM PHILADELPHIA    ###### q*e | 4*6")
+            print("######################################### asd | 789")
+            print(self.get_monsters()[self.this_monster[0]].type)
             print("##################### MAP{}:{} ##################### ".format(self.current_map[0], self.current_map[1]))
-
         elif self.head[0] == 1:
             print("################################################## ")
             print("################# A SPELL IS CAST ################ ")
@@ -578,6 +593,7 @@ class Map:
         elif self.head[0] == 2:
             print("################################################## ")
             print("################ MONSTER ATTACKED ################ ")
+            print(self.get_monsters()[self.this_monster[0]].type)
             print("################################################## ")
         elif self.head[0] == 3:
 
@@ -619,6 +635,10 @@ class Map:
             print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ")
             print("######## !! YOU HAVE BEEN REINCARNATED !! ######## ")
             print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ")
+
+
+
+
 
     def mapit(self, player, monsters, a='', b=''):
         '''PRINTS MAP : CALLED INTERNALLY'''
@@ -689,8 +709,20 @@ class Map:
         self.hud(player)
 
 
+    def cleanse_map(self, monsters):
+        # REMOVE MONSTERS BEFOR SWITCHING MAPS:
 
-        # CALCULATE TRANSLATION OF position
+        for m in range(len(monsters)):
+            mon_row = monsters[m].position[0]
+            mon_col = monsters[m].position[1]
+            mon_colm = mon_col
+            newrow = self.maps[self.current_map[0]][self.current_map[1]][mon_row][: (mon_colm - 1) * 2]
+            newrow += " ."
+            newrow += self.maps[self.current_map[0]][self.current_map[1]][mon_row][(mon_colm) * 2:]
+            self.maps[self.current_map[0]][self.current_map[1]][mon_row] = newrow
+
+
+                        # CALCULATE TRANSLATION OF position
     def move(self, arg, player, monsters):
         ''' RECEIVE INPUT : CALLED EXTERNALLY
         map.move(number)
@@ -716,6 +748,7 @@ class Map:
                     player.position[0] = player.position[0] - 1
                     # player.position[1] = player.position[1]
             else:
+                self.cleanse_map(monsters)
 
                 self.current_map[0] += -1
                 player.position[0] = self.MAP_SIZE - 1
@@ -737,6 +770,7 @@ class Map:
                     player.position[0] = player.position[0] + 1
                     # player.position[1] = player.position[1]
             else:
+                self.cleanse_map(monsters)
                 self.current_map[0] += 1
                 player.position[0] = (player.position[0] + 1 ) % 24
         #          CHANGE MAP
@@ -755,6 +789,7 @@ class Map:
             # player.position[0] = player.position[0]
 
             else:
+                self.cleanse_map(monsters)
                 self.current_map[1] += 1
                 player.position[1] = 1
 
@@ -776,6 +811,7 @@ class Map:
             # move(4)
 
             else:
+                self.cleanse_map(monsters)
                 self.current_map[1] += -1
                 player.position[1] = 24
 
