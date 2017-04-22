@@ -21,10 +21,10 @@ class CharacterAttributes:
             'charasaurus_rex:_first_bite': self.zombie,
             'huey_the_furious_furry_ruffed_lemur_of_acrimonious_vengeance': self.lemur,
             'motuba_the_gorilla_guardian_of_the_broad_street_subway_band': self.gorilla,
-            'cyborg': self.cyborg,
-            'technovore': self.technovore,
-            'midnight_elf': self.midnight_elf,
-            'bear': self.bear
+            'cyborg_cyndi:_iron_woman': self.cyborg,
+            'electro_slug_@_south_street': self.technovore,
+            'the_marauding_midnight_elf': self.midnight_elf,
+            'warrior_samurai_bear': self.bear
         }
         classes[slug]()
 
@@ -119,3 +119,44 @@ class CharacterAttributes:
         self.strength = randrange(15, 30)
         self.magic = randrange(10, 17)
         self.intelligence = randrange(7, 25)
+
+    def kangaroo(self):
+        self.name = 'Thumperoo: Steel Fisted World Champion Kick Boxer'
+        self.hp = randrange()
+        self.exp = randrange()
+        self.stamina = randrange()
+        self. armor = randrange()
+        self.strength = randrange()
+        self.magic  = randrange()
+        self.intelligence = randrange()
+
+    def snake(self):
+        self.name = 'Scaler the deceptive boa constrictor'
+        self.hp = randrange()
+        self.exp = randrange()
+        self.stamina = randrange()
+        self. armor = randrange()
+        self.strength = randrange()
+        self.magic  = randrange()
+        self.intelligence = randrange()
+
+    def rhinosorus(self):
+        self.name = 'Crush Thunder the thunderous earth shacking Rhino'
+        self.hp = randrange()
+        self.exp = randrange()
+        self.stamina = randrange()
+        self. armor = randrange()
+        self.strength = randrange()
+        self.magic  = randrange()
+        self.intelligence = randrange()
+
+
+    def hawk(self):
+        self.name = 'Striker Hawk'
+        self.hp = randrange()
+        self.exp = randrange()
+        self.stamina = randrange()
+        self. armor = randrange()
+        self.strength = randrange()
+        self.magic  = randrange()
+        self.intelligence = randrange()
