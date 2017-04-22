@@ -125,9 +125,9 @@ class CharacterAttributes:
         self.hp = randrange()
         self.exp = randrange()
         self.stamina = randrange()
-        self. armor = randrange()
+        self.armor = randrange()
         self.strength = randrange()
-        self.magic  = randrange()
+        self.magic = randrange()
         self.intelligence = randrange()
 
     def snake(self):
@@ -135,28 +135,27 @@ class CharacterAttributes:
         self.hp = randrange()
         self.exp = randrange()
         self.stamina = randrange()
-        self. armor = randrange()
+        self.armor = randrange()
         self.strength = randrange()
-        self.magic  = randrange()
+        self.magic = randrange()
         self.intelligence = randrange()
 
     def rhinosorus(self):
-        self.name = 'Crush Thunder the thunderous earth shacking Rhino'
+        self.name = 'Crush Thunder the thunderous earth shaking Rhino'
         self.hp = randrange()
         self.exp = randrange()
         self.stamina = randrange()
-        self. armor = randrange()
+        self.armor = randrange()
         self.strength = randrange()
-        self.magic  = randrange()
+        self.magic = randrange()
         self.intelligence = randrange()
-
 
     def hawk(self):
         self.name = 'Striker Hawk'
         self.hp = randrange()
         self.exp = randrange()
         self.stamina = randrange()
-        self. armor = randrange()
+        self.armor = randrange()
         self.strength = randrange()
-        self.magic  = randrange()
+        self.magic = randrange()
         self.intelligence = randrange()
