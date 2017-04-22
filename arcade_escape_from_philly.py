@@ -1,29 +1,17 @@
-# TRANSFORM INTO CLASSES
-
-# CLASSES:
-# PRINT_SCREEN_MAP
 # Instruction screens before first frame.
 # magic spells released at certain levels
 # Multiple monsters
 # magic cost gold.
-
-
-# ORDER OF CLASSES
-#
 # Map
 # Monster
 # Player
 # # SpellBook
-# # Engine
-
-
-
-## ADVENTURE.PY ### WITH CLASSES #################################
+## ESCAPE FROM PHILADELPHIA .PY #################################
 ##################################################################
-# import random
-
-from random import randrange
+from random import randrange, choice
 from map import Map
+from monster import Monster
+
 
 MAP_SIZE = 24
 LIVES = [4]
@@ -31,22 +19,18 @@ monster_modes = ['ROAM', 'FIGHT']
 this_monster = [0]
 level = [1]
 
-# initialize
-
 def get_level():
     return level[0]
 
 def get_lives_func():
     return LIVES[0]
 
-
 def generate_monster():
     player.level += 1
     level[0] += 1
-    monsters.append(Monster(level[0]))
+    monsters.append(MonSteR(level[0]))
 
 ##################################################################
-
 
 print("################################################## ")
 print("################################################## ")
@@ -73,12 +57,10 @@ print("################################################## ")
 print("################################################## ")
 
 
-
-
-
-
-class Monster:
+class MonSteR(Monster):
+# class MonSteR:
     def __init__(self, lvl ):
+        Monster.__init__(self)
         self.mode = monster_modes[0]
         self.level = lvl
         self.m_typ = self.m_type()
@@ -97,18 +79,30 @@ class Monster:
 
     def m_type(self):
         return [
-            ('Lizard Man', " §", ".,• º∞*.  xXX"),
-            ('Dragon Breath', " £", ".,•º #∞*  xXX"),
-            ('Kraken', " §", ".,•º #∞*:  xXX"),
-            ('Mage', " π", " ,º ∞* .;  xXX"),
-            ('Sith Lord', " £", " .,*;  xXX"),
-            ('Skeleton', " ¥", ". •*#  xXX"),
-            ('Wizard', " π", " .,•º∞*;  xXX"),
-            ('Lock Ness', " ∫", ".,• º∞*;  xXX"),
-            ('T-Rex', " £", ".,•º∞ *:  xXX"),
-            ("C'Thulu", " ƒ", " .#,•º∞*:  xXX"),
-            ('Hydra', " §", ".,•º∞*: .  xXX")
-        ][randrange(25)  % 10]
+            (self.named(), " §", ".,• º∞*.  xXX"),
+            (self.named(), " £", ".,•º ∞#*  xXX"),
+            (self.named(), " §", ".,•º ∞*:  xXX"),
+            (self.named(), " π", " ,º ∞* .;  xXX"),
+            (self.named(), " £", " .,*;  xXX"),
+            (self.named(), " ¥", ". •*  xXX"),
+            (self.named(), " π", " .,•º∞*;#  xXX"),
+            (self.named(), " ∫", ".,• º∞*;  xXX"),
+            (self.named(), " £", ".,•º∞ *:  xXX"),
+            (self.named(), " ƒ", " .,•º∞*:  xXX"),
+            (self.named(), " §", ".,•º∞*: .  xXX"),
+
+            # ('Lizard Man', " §", ".,• º∞*.  xXX"),
+            # ('Dragon Breath', " £", ".,•º ∞#*  xXX"),
+            # ('Kraken', " §", ".,•º ∞*:  xXX"),
+            # ('Mage', " π", " ,º ∞* .;  xXX"),
+            # ('Sith Lord', " £", " .,*;  xXX"),
+            # ('Skeleton', " ¥", ". •*  xXX"),
+            # ('Wizard', " π", " .,•º∞*;#  xXX"),
+            # ('Lock Ness', " ∫", ".,• º∞*;  xXX"),
+            # ('T-Rex', " £", ".,•º∞ *:  xXX"),
+            # ("C'Thulu", " ƒ", " .,•º∞*:  xXX"),
+            # ('Hydra', " §", ".,•º∞*: .  xXX")
+        ][randrange(25) % 10]
 
     def w_name(self):
         return [
@@ -121,13 +115,37 @@ class Monster:
             'Spike',
             'Hatchet',
             'Chainsaw'
-        ][randrange(23)  % 9]
+        ][randrange(23) % 9]
 
+    def named(self):
+        adjectives = choice(['aggravating', 'annoying', 'distressing', 'disturbing', 'inconvenient', 'arduous',
+                    'bothersome', 'troublesome', 'irritating', 'troublesome', 'vexing', 'exasperating', 'rebarbative incommodious',
+                    'remote', 'vexatious', 'ambitious', 'demanding', 'difficile', 'exacting',
+                    'wearisome', 'formidable', 'galling', 'onerous', 'operose', 'painful', 'problematic',
+                    'prohibitive', 'rigid', 'severe', 'strenuous', 'titanic', 'toilsome', 'tough', 'trying', 'unyielding',
+                    'burdensome', 'challenging', 'crucial', 'gargantuan', 'heavy', 'herculean', 'immense', 'irritating',
+                    'labored', 'laborious'])
 
+        place_names = choice(['Frankfurter Ave.', 'the Passyunk Warrior Clan', 'the Philly Cheesesteak Factory',
+                    'Manayunk Railroad Yard','Skidoo Water Park Palace', 'Dunks Ferry Playground', 'Pigeons\' Gauntlet',
+                    'the Inauspicious Tower of Dread at Mario Lanza Boulevard', 'the Dungeon at Dicks Ave.',
+                    'the Reading Terminal Market Book Club', 'the Stronghold of Doom at Longwood Gardens',
+                    'the cave under the Philadelphia Zoo', 'the dreaded Eastern State Penitentiary',
+                    'the depressing, perenial dissapointment known as the Philadelphia Eagles'])
 
+        monsterr = choice(['Rabbit', 'Troll', 'Dragon', 'Carniverous Camel', 'Loner Llama', 'Ogre', 'Slime Mold', 'Fungal Beast',
+                        'Vampire', 'Dampyr', 'malformed non-specific animal', 'Shark Rocket', 'Tengu', 'Shadow Liger', 'Dragon', 'Gaslich',
+                        'Hollowlich', 'Embermask', 'Bowelwraith', 'Clammy-hand Creeper', 'Creepy Cuddler', 'Mutant Tortoises of Terror',
+                        'Gregarious Geek', 'Lurking Llamas', 'Horrible Screaker Witch', 'Weeping Wonderboy', 'Boston Terrier of Terror',
+                        'Courier of Danger',
+                        'Mutant Mummer Zombie', 'Spasm Zombie', 'Scourge', 'Wolf-man Warg', 'Water Buffalo', 'Wham-a-Whama Rock Troll',
+                        'Woodland Spirit', 'Wraith', 'Wyvern', 'Murder of Crows', 'Lion-Eagle Hybrid', 'Apiarian Phantom'])
+        of = choice(['of', 'from'])
+        print('The {} {} {} {}'.format(adjectives, monsterr, of, place_names))
+        return 'The {} {} {} {}'.format(adjectives, monsterr, of, place_names)
 
 class Player:
-    def __init__(self, health=100, gold=5, name='Zork', lvl=1, init_position=[10, 1024]):
+    def __init__(self, health=100, gold=5, name='Zork', lvl=1, init_position=[12, 12]):
         self.position = init_position
         # self.position = [10, 1024]
         self.name = name
@@ -163,12 +181,9 @@ class Player:
 # player['inventory'][0] = new_weapon(level[0])
 ##################################################################
 
-
-
-
 def check_proximity(arg=2):
 
-    for m in range(2):
+    for m in range(len(monsters)):
         if abs(monsters[m].position[0] - player.position[0]) < arg and arg > abs(
                     monsters[m].position[1] - map.get_index_from_bit(player.position[1])):
             this_monster[0] = m
@@ -177,25 +192,22 @@ def check_proximity(arg=2):
 
 
 def check_death(arg):
-    if arg < 0:
-        return True
-    return False
-
+    return arg < 0
 
 def game_over(win):
     if win:
         map.head[0] = 4
         m0 = monsters[this_monster[0]].position[0]
         m1 = monsters[this_monster[0]].position[1]
-        new_row = map.map_rows[m0][:(m1 - 1) * 2]
+        new_row = map.maps[map.current_map[0]][map.current_map[1]][m0][:(m1 - 1) * 2]
         new_row += ' x'
-        new_row += map.map_rows[m0][m1 * 2:]
-        map.message_key[1] = 'killedit'
+        new_row += map.maps[map.current_map[0]][map.current_map[1]][m0][m1 * 2:]
         # map.message_key[1] = 'killedit'
-        map.map_rows[m0] = new_row
+        map.maps[map.current_map[0]][map.current_map[1]][m0] = new_row
 
         # determine which monster
         z = monsters.pop(this_monster[0])
+        map.message_key[1] = 'killedit'
         generate_monster()
     else:
         LIVES[0] -= 1
@@ -206,7 +218,6 @@ def game_over(win):
             map.header(player)
             quit()
 
-
 def monster_attack(m):
     v = monsters[m].inventory[0]['damage'] - player.inventory[1]['block']
     player.health -= v
@@ -214,13 +225,10 @@ def monster_attack(m):
         game_over(False)
     map.message_key[2] = 'dmg ' + str(monsters[m].inventory[0]['damage'])
 
-
 ########################################################################################################################
 
-# this_monster[0]
 def player_attack(arg):
     print(arg)
-    # if check_proximity():
     if arg == 'kill':
         monsters[this_monster[0]].health = monsters[this_monster[0]].health - (player.inventory[0]['damage'] * 10)
         map.head[0] = 2
@@ -238,18 +246,16 @@ def player_attack(arg):
     map.monster_go(player, monsters)
     map.mapit(player, monsters)
 
-
-
-
 ########################################################################
 ######################  SPELL BOOK  ####################################
 ########################################################################
 def heal_self(arg='9'):
     print(arg)
-    player.gold = player.gold - int(arg)
-    player.health = player.health + int(arg)
-    #self.monster_go()
-    map.monster_go(player, monsters)
+    try:
+        player.gold = player.gold - int(arg)
+        player.health = player.health + int(arg)
+    except:
+        map.monster_go(player, monsters)
 
 def cast_spell(spell=''):
     if spell[:5] == 'black' and player.gold > 60:
@@ -292,13 +298,11 @@ def cast_spell(spell=''):
             player_attack(spell)
 
 ########################################################################
-######################  /SPELL BOOK  ###################################
+###################### //SPELL BOOK  ###################################
 ########################################################################
 
-
-monsters = [Monster(1), Monster(1)]
+monsters = [MonSteR(1), MonSteR(1), MonSteR(1)]
 player = Player()
-
 
 def get_monsters_fn():
     return monsters
@@ -306,12 +310,8 @@ def get_monsters_fn():
 map = Map(player, monsters, monster_attack, get_level, get_lives_func, get_monsters_fn)
 map.mapit(player, monsters)
 
-
-
-
 while True:
     command = input("Type Command: ( n s e w a(t)tack cast heal x:exit )\n>>> ")
-
     if command[:2] == 'at' or 't' == command[:1] or command[:1] == 'w' or ' ' == command[:1] or '' == command[:1]:
         if check_proximity():
             player_attack(command[command.find(" ") + 1:])
@@ -324,8 +324,6 @@ while True:
         map.mapit( player, monsters)
 
     elif command[:4] == 'heal' or 'h' == command[:1]:
-
-        # if len(command) > 4:
         if command.find(' ') > -1:
             heal_self(command[command.find(' '):])
         else:
