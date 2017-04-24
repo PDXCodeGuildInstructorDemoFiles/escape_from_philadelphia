@@ -1,12 +1,12 @@
 from char_class import CharacterAttributes
-# from inventory import Inventory
+from inventory import Inventory
 
 
 class Character:
     def __init__(self, name):
         self.name = name
         self.cls = self.choose_class()
-        # self.inv = self.create_inv()
+        self.inv = self.create_inv()
         self.level = 1
 
     def choose_class(self):
@@ -24,9 +24,11 @@ class Character:
         q = int(input('What class do you choose? '))
         return CharacterAttributes(d[q])
 
+    def create_inv(self):
+        return Inventory('player bag', 50)
 
-        # def create_inv(self):
-    #     return Inventory('player bag', 50)
+    def __str__(self):
+        return 'HP: {}, Total Armor: {}, weapon: {}, equipped armor: {}'.format(self.cls.hp, self.cls.armor, self.inv.weapon, self.inv.armor)
 
 if __name__ == '__main__':
     q = input('Hello what is your name? ')
@@ -48,4 +50,4 @@ if __name__ == '__main__':
 
 
     def generate_character():
-
+        pass

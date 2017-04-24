@@ -1,5 +1,5 @@
 from char import Character
-
+from loot_crate import LootCrate
 
 class Game:
     def __init__(self):
@@ -20,12 +20,19 @@ class Game:
         while True:
             pass
 
+    def console(self):
+        print('story')
+        player_alive = True
+        while player_alive:
+            q = input('What would you like to do? ')
+            if 'attack' in q:
+                pass
+            elif 'look' in q and 'treasure' in q:
+                crate = LootCrate(0, self.player.level)
+                self.player.inv.place_item(crate.take_one_item())
+            elif 'look' in q and 'bags' in q:
+                self.player.inv.console(self.player)
 
-game = Game()
 if __name__ == '__main__':
-    from weapon_list import create_common_weapon
-    sword = create_common_weapon(game.player.level)
-    print(game.player.name)
-    game.player.inv.place_item(sword)
-    # print(game.player.inv.inv)
-    print(game.player.inv.weight)
+    game = Game()
+    game.console()
