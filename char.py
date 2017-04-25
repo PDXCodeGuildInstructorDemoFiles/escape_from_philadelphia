@@ -8,6 +8,8 @@ class Character:
         self.cls = self.choose_class()
         self.inv = self.create_inv()
         self.level = 1
+        self.char = ' {} '
+        self.location = (0, 1)
 
     def choose_class(self):
         print('''Press 1 for Nuke Elf, 2 for Human, 3 for Zombie, 4 for Lemur, 5 for Gorilla, 6 for Cyborg, 

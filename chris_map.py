@@ -24,7 +24,7 @@ class Map:
         for i in range(self.map_size):
             for y in range(self.map_size):
                 key = (i, y)
-                map_dict[key] = MapObject('none', '    ')
+                map_dict[key] = MapObject('none', ' .. ')
         return map_dict
 
     def check_move(self, object, direction):
