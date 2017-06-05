@@ -6,6 +6,10 @@ class LootCrate:
     def __init__(self, location, lvl):
         self.location = location
         self.contents = self.create_contents(lvl)
+        self.name = 'LootCrate'
+        self.traversable = False
+        self.looted = False
+        self.avatar = ' 📦  '
 
     def __str__(self):
         return '{}'.format(self.contents)

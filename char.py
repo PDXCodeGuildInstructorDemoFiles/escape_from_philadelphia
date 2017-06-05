@@ -8,7 +8,7 @@ class Character:
         self.cls = self.choose_class()
         self.inv = self.create_inv()
         self.level = 1
-        self.char = ' {} '
+        self.avatar = ' {} '
         self.location = (0, 1)
 
     def choose_class(self):
